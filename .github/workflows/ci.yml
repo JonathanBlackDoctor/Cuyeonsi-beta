@@ -72,7 +72,9 @@ jobs:
     name: Playwright E2E (16개 엔딩 자동 플레이)
     runs-on: ubuntu-latest
     needs: build
-    timeout-minutes: 15
+    # 2026-05-11 옵션 C: 15→30분. CI 러너 cold-cache로 첫 시도 1.5m timeout × 16 + retry 합산이 15분 한도 초과.
+    # helpers.ts expectEnding timeoutMs(90s)는 그대로 — retry로 회복 가능. job 한도만 늘려 16/16 완주 보장.
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4

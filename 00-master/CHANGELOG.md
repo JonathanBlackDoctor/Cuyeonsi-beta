@@ -16,6 +16,16 @@
 
 ## 이력
 
+### 2026-05-11 — 베타 출시 ✅ + CI e2e job timeout 15→30분 (옵션 C)
+
+- **베타 출시 성공**: 라이브 URL `https://jonathanblackdoctor.github.io/Cuyeonsi-beta/` HTTP 200 OK 확인 (Last-Modified 2026-05-10 17:41 GMT). `<title>구연시: 본과 1학년의 봄</title>` + og:title/og:image/twitter card 정상. `deploy.yml`(Pages 배포)은 `ci.yml`과 독립이라 e2e 실패 무관 첫 푸시 직후 성공.
+- **CI e2e 옵션 C 처방**: `.github/workflows/ci.yml` e2e job `timeout-minutes: 15 → 30`. 진단 — 16/16 첫 시도 1.5m timeout(`helpers.ts:167 expectEnding timeoutMs = 90_000`) → retry 2-4초 성공. CI 러너 cold cache로 95MB dist 첫 로드 90초 초과. retry는 OS file cache + HTTP cache warm으로 즉시 성공. cold start 1.5m × 16 + 작은 retry = ~25분 안에 끝, 15분 한도 초과로 cancel됐던 회귀 처방.
+- **무수정**: `helpers.ts` timeoutMs(90s) + playwright.config `retries: 2` 그대로. retry로 회복 가능한 flake라 job 한도만 늘려 16/16 완주 보장.
+- **수정 1건**: `.github/workflows/ci.yml` e2e job timeout-minutes + 처방 사유 주석.
+- **모듈** (status: review): `.github/workflows/ci.yml`.
+- **사유**: 베타 출시 완료 후 CI 그린 복구. cold-cache 근본 처방(B: warmup, D: 비활성)은 별도 라운드. 단순 timeout 상향이 가장 낮은 위험.
+- **승인**: PM 구두 (2026-05-11, 옵션 C 선택).
+
 ### 2026-05-11 — 온라인 랭킹 백엔드 JSONBin → Pantry 재교체 (PM 셋업 401 반복 → UUID 1개 모델로 단순화)
 
 - **변경**: 같은 날 오전 도입한 JSONBin.io 안 폐기 → Pantry (https://getpantry.cloud) 백엔드로 재교체. PM이 .env.local에 키 박아 dev 재기동하니 `X-Master-Key is invalid or the bin doesn't belong to your account` 401 반복. 진단 로그로 키 길이 38·47·`/` 시작·`$` 없음 확인 → JSONBin 어카운트 페이지에서 PM이 두 번 다 X-Access-Key를 X-Master-Key 자리에서 복사한 것. X-Access-Key 헤더로도 시도했으나 같은 401(`bin doesn't belong to your account`) → bin과 key가 같은 계정 소속인지조차 확실히 매칭 안 되는 상태. JSONBin UI 헷갈림이 PM 비기술자에게 비현실적 → **키 1개(UUID)만 쓰는 Pantry로 백엔드 전환**.
