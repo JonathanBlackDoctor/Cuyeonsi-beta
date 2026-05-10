@@ -289,7 +289,7 @@ export function EndingScreen() {
       {/* 2b. BG-only 엔딩에 윈너 히로인 스프라이트 합성 (vignette + 오버레이 사이) */}
       {useDecisive && isBg && flavor.sprite && (
         <img
-          src={`/img/sprites/${flavor.sprite}.webp`}
+          src={`img/sprites/${flavor.sprite}.webp`}
           alt=""
           loading="eager"
           decoding="async"

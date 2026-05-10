@@ -101,7 +101,7 @@ export function EndingHistoryModal({ endingId, onClose }: Props) {
           <div className="flex items-center gap-3 flex-1 min-w-0">
             {/* 1:1 썸네일 — 자산 누락 시 onError 숨김 */}
             <img
-              src={`/img/ending-square/${endingId}.webp`}
+              src={`img/ending-square/${endingId}.webp`}
               alt=""
               loading="lazy"
               decoding="async"

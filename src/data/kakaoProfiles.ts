@@ -17,17 +17,17 @@ interface ProfileMapping {
 }
 
 const FRIEND_PROFILES: Record<string, ProfileMapping> = {
-  김규민: { avatar: '/img/avatar/gyumin.webp', name: '김규민' },
-  표경민: { avatar: '/img/avatar/gyeongmin.webp', name: '표경민' },
-  조나단: { avatar: '/img/avatar/nathan.webp', name: '조나단' },
-  정욱: { avatar: '/img/avatar/wook.webp', name: '정욱' },
+  김규민: { avatar: 'img/avatar/gyumin.webp', name: '김규민' },
+  표경민: { avatar: 'img/avatar/gyeongmin.webp', name: '표경민' },
+  조나단: { avatar: 'img/avatar/nathan.webp', name: '조나단' },
+  정욱: { avatar: 'img/avatar/wook.webp', name: '정욱' },
   // 오준혁: 카톡 프로필 자산 없음 → default1·2·3 해시 폴백 (pickDefaultAvatar)
 };
 
 /** v2 프로필 적용 — 3번째 카톡 씬부터. */
 const FRIEND_PROFILES_V2: Record<string, ProfileMapping> = {
-  김규민: { avatar: '/img/avatar/gyumin_v2.webp', name: '김규민' },
-  표경민: { avatar: '/img/avatar/gyeongmin_v2.webp', name: '표경민' },
+  김규민: { avatar: 'img/avatar/gyumin_v2.webp', name: '김규민' },
+  표경민: { avatar: 'img/avatar/gyeongmin_v2.webp', name: '표경민' },
 };
 
 /**
@@ -59,9 +59,9 @@ export function shouldUseV2Profile(sceneId: string | null | undefined): boolean 
 }
 
 const DEFAULT_AVATARS = [
-  '/img/avatar/default1.webp',
-  '/img/avatar/default2.webp',
-  '/img/avatar/default3.webp',
+  'img/avatar/default1.webp',
+  'img/avatar/default2.webp',
+  'img/avatar/default3.webp',
 ];
 
 /** 같은 sender는 항상 같은 default 아바타가 나오도록 결정적으로 해시. */
@@ -77,15 +77,15 @@ export function resolveProfile(
   sceneId?: string | null,
 ): ProfileMapping {
   if (sender === 'yunmo' || sender === YUNMO.id || sender === YUNMO.name) {
-    return { avatar: '/img/avatar/yunmo.webp', name: YUNMO.name };
+    return { avatar: 'img/avatar/yunmo.webp', name: YUNMO.name };
   }
   if (isHeroineId(sender)) {
     const h = HEROINES[sender];
-    return { avatar: `/img/avatar/${h.id}.webp`, name: h.name };
+    return { avatar: `img/avatar/${h.id}.webp`, name: h.name };
   }
   for (const h of Object.values(HEROINES)) {
     if (sender === h.id || sender === h.name) {
-      return { avatar: `/img/avatar/${h.id}.webp`, name: h.name };
+      return { avatar: `img/avatar/${h.id}.webp`, name: h.name };
     }
   }
   if (shouldUseV2Profile(sceneId) && FRIEND_PROFILES_V2[sender]) {

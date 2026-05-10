@@ -28,7 +28,7 @@ export function BackgroundLayer() {
       return;
     }
     const resolved = BG_ALIAS[bg.image] ?? bg.image;
-    const newSrc = `/img/bg/${resolved}.webp`;
+    const newSrc = `img/bg/${resolved}.webp`;
     if (prevSrcRef.current === newSrc) return;
 
     if (prevSrcRef.current === null) {

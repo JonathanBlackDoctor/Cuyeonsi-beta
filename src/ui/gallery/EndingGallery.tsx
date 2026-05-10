@@ -56,7 +56,7 @@ export function EndingGallery() {
             >
               {/* 1:1 썸네일 — 자산 누락 시 onError 숨김 (배경 색만 노출) */}
               <img
-                src={`/img/ending-square/${e.id}.webp`}
+                src={`img/ending-square/${e.id}.webp`}
                 alt={e.title}
                 loading="lazy"
                 decoding="async"

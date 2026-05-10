@@ -157,7 +157,7 @@ export function KakaoMessage({
                 for (let i = 0; i < sender.length; i++) h = (h * 31 + sender.charCodeAt(i)) | 0;
                 const idx = Math.abs(h) % 3;
                 img.dataset.fallback = '1';
-                img.src = `/img/avatar/default${idx + 1}.webp`;
+                img.src = `img/avatar/default${idx + 1}.webp`;
               }}
             />
           ) : null}

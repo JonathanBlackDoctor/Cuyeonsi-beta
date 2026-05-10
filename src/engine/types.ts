@@ -150,7 +150,7 @@ export interface KakaoMessage {
   text: string;
   delay?: number;
   typing?: boolean;
-  /** 사진 메시지 — 박혀 있으면 텍스트 대신 이미지 버블로 렌더. 경로는 public 기준 (`/img/...`). */
+  /** 사진 메시지 — 박혀 있으면 텍스트 대신 이미지 버블로 렌더. 경로는 public 기준 (`img/...`). */
   image?: string;
   /**
    * 메시지 등장 전 머뭇거림 시퀀스 — 메시지 단위 미세 조정.

@@ -39,16 +39,16 @@ export function preloadSceneAssets(commands: readonly SceneCommand[]): void {
   for (const cmd of commands) {
     if (cmd.type === 'BG' && typeof cmd.image === 'string' && cmd.image !== 'black' && cmd.image !== 'white') {
       const resolved = BG_ALIAS[cmd.image] ?? cmd.image;
-      preloadImage(`/img/bg/${resolved}.webp`);
+      preloadImage(`img/bg/${resolved}.webp`);
     } else if (cmd.type === 'CG' && typeof cmd.cgId === 'string') {
-      preloadImage(`/img/cg/${cmd.cgId}.webp`);
+      preloadImage(`img/cg/${cmd.cgId}.webp`);
     } else if (
       cmd.type === 'CHARACTER' &&
       typeof cmd.sprite === 'string' &&
       typeof cmd.id === 'string'
     ) {
       const fileName = resolveSpriteName(cmd.id, cmd.sprite);
-      if (fileName) preloadImage(`/img/sprites/${fileName}.webp`);
+      if (fileName) preloadImage(`img/sprites/${fileName}.webp`);
     }
   }
 }

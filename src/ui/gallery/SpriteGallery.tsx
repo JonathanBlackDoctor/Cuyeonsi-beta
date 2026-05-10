@@ -63,7 +63,7 @@ export function SpriteGallery() {
                   >
                     <div className="flex-1 flex items-end justify-center overflow-hidden">
                       <img
-                        src={`/img/sprites/${id}.webp`}
+                        src={`img/sprites/${id}.webp`}
                         alt={id}
                         loading="lazy"
                         decoding="async"
@@ -94,7 +94,7 @@ export function SpriteGallery() {
           data-testid="sprite-fullscreen"
         >
           <img
-            src={`/img/sprites/${openId}.webp`}
+            src={`img/sprites/${openId}.webp`}
             alt={openId}
             decoding="async"
             className="max-w-[95%] max-h-[95%] object-contain"

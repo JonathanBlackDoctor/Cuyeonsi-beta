@@ -1,5 +1,5 @@
 /**
- * 게임 진입점 OP 영상 — `/video/video_opening.mp4` 5~7초 자동재생.
+ * 게임 진입점 OP 영상 — `video/video_opening.mp4` 5~7초 자동재생.
  *
  * - 진입 시 검정 오버레이 800ms step fade-in (16 step × 50ms) 후 play() 호출
  *   → 사용자 의도("페이드 인 된 뒤에 시작") 그대로
@@ -82,7 +82,7 @@ export function OpeningVideo({ onComplete }: Props) {
     >
       <video
         ref={videoRef}
-        src="/video/video_opening.mp4"
+        src="video/video_opening.mp4"
         muted
         playsInline
         preload="auto"

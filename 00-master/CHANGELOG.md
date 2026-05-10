@@ -16,6 +16,24 @@
 
 ## 이력
 
+### 2026-05-11 — 자산 경로 절대→상대 일괄 전환 (GitHub Pages 서브패스 호환)
+
+- **변경 사실**: PM 라이브 사이트 보고 — UI/text는 정상 보이지만 모든 자산(이미지/사운드/영상) 미로드. 진단: `vite.config.ts base: './'` 자체는 정상이지만 코드 안의 절대경로 `/img/`, `/snd/`, `/video/`가 GitHub Pages 서브패스(`/Cuyeonsi-beta/`)에서 `https://jonathanblackdoctor.github.io/img/...` 로 잘못 해석되어 404. 처방: 모든 자산 경로에서 leading `/` 제거 → 상대경로화. 브라우저가 document URL(`/Cuyeonsi-beta/`) 기준으로 해석 → `/Cuyeonsi-beta/img/...` ✓ 정상 로드.
+- **수정 23건**:
+  - 코드 19 파일: `assetPreloader.ts` (3건) · `endingFlavor.ts` (4건) · `CGOverlay.tsx` · `AffectionThermometer.tsx` (8건) · `kakaoProfiles.ts` (12건) · `BackgroundLayer.tsx` · `CharacterLayer.tsx` · `audioMappings.ts` (2건) · `EndingScreen.tsx` · `OpeningVideo.tsx` (2건) · `KakaoMessage.tsx` · `CGGallery.tsx` (2건) · `EndingGallery.tsx` · `SpriteGallery.tsx` (2건) · `EndingHistoryModal.tsx` · `VideoLayer.tsx` (2건) · `generateEndingImage.ts` (2건) · `RejectEnding.tsx` · `types.ts` (주석 1건). 총 47건 치환.
+  - 시나리오 .md 2 파일: `03-story/scenarios/ch06_h4_seoyoon.md` + `compressed/ch06_h4_seoyoon.md` (KAKAO 사진 첨부 `image:/img/sprites/...` → `image:img/sprites/...`). 총 3건 치환.
+  - 컴파일 산출물 2 파일: `npm run compile:all`로 `ch06_h4_03_perv_pair.scene.json` 풀/압축 양 모드 재생성.
+- **치환 패턴** (PowerShell `[System.IO.File]::ReadAllText/WriteAllText` UTF-8 NoBOM):
+  - `(['""``])/img/` → `$1img/` (quote/backtick 보존)
+  - `(['""``])/snd/` → `$1snd/`
+  - `(['""``])/video/` → `$1video/`
+  - `:/img/` → `:img/` (KAKAO `image:/img/...` 인라인 메타용)
+- **검증**: typecheck 0 / vitest 104/104 / compile:all 풀212+압축212 / validate 0 errors (사전 경고 2건은 무관) / build 3.67s / preview localhost:4173 자산 200 OK 응답 확인.
+- **호환성**: 상대경로는 어떤 deploy base에서도 작동 (root domain·서브패스·로컬 dev 모두). 향후 정식 출시 별 repo로 옮겨도 무수정.
+- **모듈** (status: review): 코드 19 파일 + 시나리오 .md 2 파일 + 컴파일 산출물 2 파일.
+- **사유**: 베타 라이브 자산 미로드 출시 차단급 회귀. 절대경로 사용이 GitHub Pages 서브패스 deploy와 호환 안 됨.
+- **승인**: PM 구두 (2026-05-11).
+
 ### 2026-05-11 — CI e2e 근본 원인 처방: autoAdvanceUntilEnding idle 대기 가드
 
 - **재진단 (옵션 C 30분도 부족 보고 후)**: 90s timeout 자체보다 더 근본 회귀 발견. `gameStore.ts:231` 초기 `runtimeMode: 'idle'` + `helpers.ts:101` autoAdvance가 `'idle' → return` 조기 종료. CI cold-cache로 scene JSON 로드 지연 시 autoAdvance가 startScene 완료 전 'idle' 상태로 읽고 즉시 return → expectEnding이 90초 동안 DOM 기다리다 timeout. retry에선 OS file cache로 startScene이 빨리 끝나 'scene' 상태로 진입해 통과. 매 테스트 NEW context로 OS 캐시 미공유였던 패턴 설명.

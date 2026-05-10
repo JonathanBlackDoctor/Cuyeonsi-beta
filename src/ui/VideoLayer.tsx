@@ -2,7 +2,7 @@
  * VEO 영상 재생 레이어 — SCENE-FORMAT VIDEO 디렉티브 처리.
  *
  * - `{ type: 'VIDEO', src }` 도착 시 풀스크린 모달 재생
- * - 자산: `/video/${src}.mp4`
+ * - 자산: `video/${src}.mp4`
  * - 모든 영상은 끝까지 재생 (라운드 #4 PM 결정 + 자산 통합 검증 라운드 후속 ④a 2026-05-08 SCENE-FORMAT skipable 옵션 정식 제거)
  * - 페이드 in/out: 시작 시 검정 → 영상 (300ms), 끝 시 영상 → 검정 (300ms) → onEnded
  * - cmd 변경 시 video.currentTime=0 + play() — rewind로 같은 영상 재진입 시 멈춤 방지
@@ -68,7 +68,7 @@ export function VideoLayer({ cmd, onEnded }: Props) {
     >
       <video
         ref={videoRef}
-        src={`/video/${cmd.src}.mp4`}
+        src={`video/${cmd.src}.mp4`}
         autoPlay
         muted
         playsInline

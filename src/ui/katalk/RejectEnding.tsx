@@ -74,7 +74,7 @@ export function RejectEnding({ onComplete }: Props) {
         style={{ background: '#000', zIndex: 'var(--z-modal)' }}
       >
         <video
-          src="/video/video_reject_seoyoon.mp4"
+          src="video/video_reject_seoyoon.mp4"
           autoPlay
           muted
           playsInline

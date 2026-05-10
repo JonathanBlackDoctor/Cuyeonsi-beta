@@ -256,7 +256,7 @@ status: review
 [KAKAO]
 - {speaker:나서윤} 약대 가운 입고 도서관 가는 길이라 사진 한 장 첨부해요
 - {speaker:나서윤} 윤모씨가 의대 가운 한 번 보여주셨으니까 저도 약대 가운 보내는 거예요
-- {speaker:나서윤, image:/img/sprites/seoyoon_outfit_school.webp}
+- {speaker:나서윤, image:img/sprites/seoyoon_outfit_school.webp}
 [/KAKAO]
 
 [지문] 카톡 모달에 사진 한 장. 약대 학생회관 앞. 약대 가운 + 안경 + 미니 가방.

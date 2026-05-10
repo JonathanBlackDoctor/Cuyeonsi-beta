@@ -40,7 +40,7 @@ export function CGGallery() {
             >
               {isUnlocked ? (
                 <img
-                  src={`/img/cg/${id}.webp`}
+                  src={`img/cg/${id}.webp`}
                   alt={id}
                   loading="lazy"
                   decoding="async"
@@ -66,7 +66,7 @@ export function CGGallery() {
           aria-label="닫기"
         >
           <img
-            src={`/img/cg/${openCgId}_full.webp`}
+            src={`img/cg/${openCgId}_full.webp`}
             alt={openCgId}
             ref={(el) => { if (el) el.setAttribute('fetchpriority', 'high'); }}
             decoding="async"

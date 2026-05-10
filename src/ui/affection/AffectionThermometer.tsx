@@ -7,7 +7,7 @@
  * Plan: 05-ui-design/UI-SPEC.md §11 + ANIMATION-SPEC.md §13 (W6 라운드 2026-05-08 갱신).
  * - 사실적 온도계 + 눈금실린더 결합. 강한 광택 / 액체 그라데이션.
  * - 눈금 10단위, 50 위치 강조선. 단계(40·60·80) 라인은 표시 안 함.
- * - bulb 안에 히로인 카톡 아바타 원형 마스킹 (`/img/avatar/{id}.webp`).
+ * - bulb 안에 히로인 카톡 아바타 원형 마스킹 (`img/avatar/{id}.webp`).
  * - 시각 효과: 수면 하이라이트, bulb 외곽 심장 펄스, 도쿠먼트 라이트(관 외곽 흐름),
  *   완료 시 spark 입자 + 전체 flash. 모두 RAF 계산값(progress·complete·pulsePhase)을 prop으로 받아 렌더.
  */
@@ -38,7 +38,7 @@ export const THERMOMETER_DISPLAY_H = 460;
 
 /**
  * heroineId → 아바타 경로 매핑.
- * H1~H5: `/img/avatar/{slug}.webp` (히로인 베이스 스프라이트 얼굴 crop).
+ * H1~H5: `img/avatar/{slug}.webp` (히로인 베이스 스프라이트 얼굴 crop).
  * NPC 친구 5명: 카톡 프로필 자산 그대로 재사용.
  * NPC mom·taeho: 별도 자산 미존재 → default 폴백 (PM 추후 합성 또는 외부 다운).
  */
@@ -48,16 +48,16 @@ function resolveAvatarPath(id: string): string {
     case 'gyeongmin':
     case 'nathan':
     case 'wook':
-      return `/img/avatar/${id}.webp`;
+      return `img/avatar/${id}.webp`;
     case 'junhyuk':
       // 오준혁은 카톡 프로필 자산 미존재 — default3 폴백 (해시 결정 회피, 안정 매핑).
-      return '/img/avatar/default3.webp';
+      return 'img/avatar/default3.webp';
     case 'mom':
-      return '/img/avatar/default1.webp';
+      return 'img/avatar/default1.webp';
     case 'taeho':
-      return '/img/avatar/default2.webp';
+      return 'img/avatar/default2.webp';
     default:
-      return `/img/avatar/${id}.webp`;
+      return `img/avatar/${id}.webp`;
   }
 }
 
@@ -66,7 +66,7 @@ export interface AffectionThermometerProps {
   value: number;
   /** 액체 표면 ±px 흔들림. RAF가 sin 보낸다. 미사용 시 0. */
   wobble?: number;
-  /** 히로인 영문 ID — `/img/avatar/{id}.webp` 매핑. bulb 안 원형 컷. */
+  /** 히로인 영문 ID — `img/avatar/{id}.webp` 매핑. bulb 안 원형 컷. */
   heroineId: string;
   /**
    * 인물 이름 라벨. 박혀 있으면 bulb(아바타) 아래 SVG <text>로 표시. (2026-05-09 사용자 결정)

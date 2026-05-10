@@ -499,7 +499,7 @@ export function CharacterLayer() {
                 }}
               >
                 <img
-                  src={`/img/sprites/${fileName}.webp`}
+                  src={`img/sprites/${fileName}.webp`}
                   alt={id}
                   loading="eager"
                   decoding="async"

@@ -40,7 +40,7 @@ export function CGOverlay() {
       aria-label={unlocked ? '다음으로 진행' : 'CG 감상 중'}
     >
       <img
-        src={`/img/cg/${cg.image}.webp`}
+        src={`img/cg/${cg.image}.webp`}
         alt={cg.cgId}
         ref={(el) => { if (el) el.setAttribute('fetchpriority', 'high'); }}
         loading="eager"

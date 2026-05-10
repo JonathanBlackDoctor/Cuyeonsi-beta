@@ -17,8 +17,8 @@ import type { EndingId } from '@/engine/types';
 export interface EndingFlavor {
   /**
    * 결과 화면 풀스크린 배경에 깔 결정적 장면.
-   * - 'cg' : `/img/cg/{id}.webp` — TRUE/HAPPY/H4_NORMAL 등 CG 보유 엔딩.
-   * - 'bg' : `/img/bg/{id}.webp` — H1/H2 NORMAL/BAD, H3 NORMAL, SOLO 등 CG 없는 엔딩.
+   * - 'cg' : `img/cg/{id}.webp` — TRUE/HAPPY/H4_NORMAL 등 CG 보유 엔딩.
+   * - 'bg' : `img/bg/{id}.webp` — H1/H2 NORMAL/BAD, H3 NORMAL, SOLO 등 CG 없는 엔딩.
    * - 'none': RejectEnding이 자체 8단계 시퀀스 처리 — EndingScreen 백업은 단순 어두운 배경.
    */
   decisiveImage:
@@ -27,7 +27,7 @@ export interface EndingFlavor {
     | { type: 'none' };
   /**
    * BG-only 엔딩에 BG 위로 합성할 윈너 히로인 스프라이트.
-   * `/img/sprites/{spriteId}.webp` (예: 'serin_smile_warm').
+   * `img/sprites/{spriteId}.webp` (예: 'serin_smile_warm').
    * undefined면 스프라이트 미합성. CG 엔딩은 CG 자체에 인물 포함되어 있어 보통 미사용.
    * SOLO 엔딩은 윈너가 없으므로 미사용.
    */
@@ -131,5 +131,5 @@ export const ENDING_FLAVOR: Record<EndingId, EndingFlavor> = {
 export function resolveDecisiveImagePath(flavor: EndingFlavor): string | null {
   if (flavor.decisiveImage.type === 'none') return null;
   const folder = flavor.decisiveImage.type === 'cg' ? 'cg' : 'bg';
-  return `/img/${folder}/${flavor.decisiveImage.id}.webp`;
+  return `img/${folder}/${flavor.decisiveImage.id}.webp`;
 }

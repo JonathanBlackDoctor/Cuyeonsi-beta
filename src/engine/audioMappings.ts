@@ -103,9 +103,9 @@ export function isKnownBgm(en: string): boolean {
 
 /** 자산 경로 헬퍼 (placeholder 시기 — 실제 자산 W5 통합 시 `public/snd/` 이동) */
 export function sfxPath(en: string): string {
-  return `/snd/sfx/${en}.mp3`;
+  return `snd/sfx/${en}.mp3`;
 }
 
 export function bgmPath(en: string): string {
-  return `/snd/bgm/${en}.mp3`;
+  return `snd/bgm/${en}.mp3`;
 }

@@ -40,7 +40,7 @@ export interface EndingImageInput {
 }
 
 /**
- * 1:1 정사각 엔딩 자산 fetch — 사전 생성된 `/img/ending-square/{id}.webp`.
+ * 1:1 정사각 엔딩 자산 fetch — 사전 생성된 `img/ending-square/{id}.webp`.
  * 자산 누락 시 null 반환 (호출자는 그라데이션 폴백).
  */
 async function fetchEndingSquare(endingId: EndingId): Promise<HTMLImageElement | null> {
@@ -50,7 +50,7 @@ async function fetchEndingSquare(endingId: EndingId): Promise<HTMLImageElement |
     img.crossOrigin = 'anonymous';
     img.onload = () => resolve(img);
     img.onerror = () => resolve(null);
-    img.src = `/img/ending-square/${endingId}.webp`;
+    img.src = `img/ending-square/${endingId}.webp`;
   });
 }
 
