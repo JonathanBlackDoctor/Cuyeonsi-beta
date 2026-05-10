@@ -162,7 +162,7 @@ const RE_KAKAO_TIMER_OPEN = /^\[KAKAO_TIMER:\s*(\d+)\]$/;
 const RE_KAKAO_CLOSE = /^\[\/(?:KAKAO|KAKAO_TIMER)\]$/;
 // 메시지 라인: `- {speaker:이름, key:value, ...} 텍스트`. 텍스트는 빈 문자열 허용 (image-only 메시지).
 const RE_KAKAO_LINE = /^-\s*\{speaker:([^,}]+)((?:,\s*[a-zA-Z0-9_]+:[^,}]+)*)\}\s*(.*)$/;
-const RE_INC = /^\[INC:\s*([A-Z_a-z0-9]+)\s*([+\-]\d+)\s*\]$/;
+const RE_INC = /^\[INC:\s*([A-Z_a-z0-9]+)\s*([+-]\d+)\s*\]$/;
 const RE_FLAG = /^\[FLAG:\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+)\s*\]$/;
 const RE_KEY = /^\[KEY:\s*(H[1-5])\s+([a-zA-Z0-9_]+)\s*\]$/;
 const RE_JUMP = /^\[JUMP:\s*([a-zA-Z0-9_]+)\s*\]$/;
@@ -388,7 +388,7 @@ function parseHint(s: string): {
 function parseSingleDirective(
   trimmed: string,
   stats: CompileStats,
-  sceneId: string,
+  _sceneId: string,
 ): SceneCommandOut | null {
   let m: RegExpMatchArray | null;
 
@@ -729,7 +729,7 @@ function parseChoiceLine(raw: string): ChoiceOut | null {
       continue;
     }
 
-    const incMatch = segment.match(/^([+\-]\d+)\s+([A-Z_a-z0-9]+)$/);
+    const incMatch = segment.match(/^([+-]\d+)\s+([A-Z_a-z0-9]+)$/);
     if (incMatch) {
       effects.push({ type: 'FLAG_INC', key: incMatch[2], delta: Number(incMatch[1]) });
       continue;
@@ -761,7 +761,7 @@ function parseChoiceLine(raw: string): ChoiceOut | null {
   return choice;
 }
 
-function skipUntil(lines: string[], start: number, re: RegExp): number {
+function _skipUntil(lines: string[], start: number, re: RegExp): number {
   let i = start;
   while (i < lines.length && !re.test(lines[i].trim())) i++;
   return i + 1;

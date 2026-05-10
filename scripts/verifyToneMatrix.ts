@@ -19,7 +19,6 @@ import {
   TONE_MATRIX,
   H3_NIGHT_DELTA,
   KEY_HEROINE_TONE,
-  DESCRIPTOR_BONUS,
   H4_REPLY_SPEED,
   computeToneDeltas,
 } from '../src/engine/toneMatrix';
@@ -217,7 +216,7 @@ for (const ms of [3000, 14999, 15000, 30000]) {
 // ──────────────────────────────────────────────────────────────────
 SECTION('5. SOLO 빌드 — 모든 답 H1·H5에 미스매치/정반대');
 
-let soloTotals: Record<HeroineId, number> = { H1: 0, H2: 0, H3: 0, H4: 0, H5: 0 };
+const soloTotals: Record<HeroineId, number> = { H1: 0, H2: 0, H3: 0, H4: 0, H5: 0 };
 const soloChoices: Array<Pick<Choice, 'tone' | 'isKey'>> = [
   // H1에 가벼운 답 (-2), H5는 +5라 SOLO엔 H5 너무 빨리 30 도달함 → 5명 모두 깎으려면 톤 분산 필요
   { tone: 'mature_serious', isKey: false }, // H5 -2, H1 +10... H1 깎으려면 다른 톤

@@ -232,7 +232,7 @@ const happyScores = byCategory['HAPPY'] ?? [];
 const normalScores = byCategory['NORMAL'] ?? [];
 const badScores = byCategory['BAD'] ?? [];
 const rejectScores = byCategory['REJECT'] ?? [];
-const soloScores = byCategory['SOLO'] ?? [];
+const _soloScores = byCategory['SOLO'] ?? [];
 
 const recS = Math.round(pct(trueScores, 50));
 const recA = Math.round(Math.max(pct(happyScores, 50), pct(trueScores, 10)));
