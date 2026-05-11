@@ -15,6 +15,7 @@ import { OrientationLock } from '@/ui/OrientationLock';
 import { OpeningVideo } from '@/ui/OpeningVideo';
 import { ModeSelect } from '@/ui/ModeSelect';
 import { IntroTyping } from '@/ui/IntroTyping';
+import { MiniControls } from '@/ui/MiniControls';
 import { useGameStore } from '@/stores/gameStore';
 import { useSettingsStore, FONT_SIZE_DEFAULT } from '@/stores/settingsStore';
 import { audioManager } from '@/engine/audioManager';
@@ -205,7 +206,11 @@ export default function App() {
           <SceneRenderer />
           {showOpening && <OpeningVideo onComplete={() => setShowOpening(false)} />}
           {!showOpening && storyMode === null && (
-            <ModeSelect onComplete={() => { /* storyMode 변경이 effect 트리거 */ }} />
+            <>
+              <ModeSelect onComplete={() => { /* storyMode 변경이 effect 트리거 */ }} />
+              {/* 모바일 QA 2026-05-11: ModeSelect에도 환경설정/음소거/전체화면 접근 — 시나리오 외 minimal 모드. */}
+              <MiniControls mode="minimal" />
+            </>
           )}
         </>
       )}

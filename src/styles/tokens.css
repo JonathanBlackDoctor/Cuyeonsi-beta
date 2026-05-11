@@ -120,18 +120,39 @@
 }
 
 /* 초소형 폰(S22 Ultra 412×915, iPhone SE 375×667 등) 전용 — 모바일 QA 2026-05-11 처방.
-   768px 룰의 대사창 38% / 폰트 22px이 작은 폰에선 캐릭터를 가리고 줄당 5~6글자만 표시되는 문제.
-   PC 디자인의 상대 비율(대사창 22%, 캐릭터 비중)을 더 가깝게 회복. */
+   2026-05-11 2차: 폰트 더 줄임(19/21/18 → 14/16/13). 사용자 실기기 검증 결과 더 작아도 OK. */
 @media (max-width: 480px) {
   :root {
     --textbox-bottom: 16px;
     --textbox-width: 94%;
     --textbox-height: 28%;
-    --textbox-padding: 14px 18px;
-    --font-size-text: 19px;
-    --font-size-name: 21px;
-    --font-size-monologue: 18px;
+    --textbox-padding: 12px 14px;
+    --font-size-text: 14px;
+    --font-size-name: 16px;
+    --font-size-monologue: 13px;
     --therm-scale: 0.55;
+    /* AffectionToast 우상단 기준점 — JS 상수(TOAST_BASE_TOP/RIGHT) 대신 CSS 변수로 노출. */
+    --toast-base-top: 16px;
+    --toast-base-right: 16px;
+  }
+}
+
+/* 작은 폰 가로 모드(height ≤ 480px + landscape) — 모바일 QA 2026-05-11 2차 처방.
+   S22 Ultra 가로(915×412) 같은 짧은 화면에서 온도계가 화면 거의 가득 차고 ModeSelect 타이틀이
+   납작해지는 문제. width 기준이 아닌 height 기준이라 ≤480px 룰과 별개로 cascade. */
+@media (max-height: 480px) and (orientation: landscape) {
+  :root {
+    /* 온도계 — 짧은 화면에서 추가 축소. 460px × 0.35 ≈ 161px (toast 카드 높이도 맞춰 짧아짐) */
+    --therm-scale: 0.35;
+    --toast-base-top: 8px;
+    --toast-base-right: 12px;
+    /* 대사창 — 짧은 화면이라 비율을 조금 더 크게 잡되 절대 height 보장 안 함 */
+    --textbox-bottom: 8px;
+    --textbox-height: 40%;
+    --textbox-padding: 10px 14px;
+    --font-size-text: 14px;
+    --font-size-name: 16px;
+    --font-size-monologue: 13px;
   }
 }
 

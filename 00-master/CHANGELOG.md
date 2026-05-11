@@ -16,6 +16,63 @@
 
 ## 이력
 
+### 2026-05-11 — 실기기 QA 후속 5건 (안드로이드 OP 회귀 회피 / 햄버거 화면 확장 / 폰트 MIN 10 / 가로 모드 / OG 절대 URL)
+
+- **변경 배경**: 직전 라운드 모바일 QA 처방 4건을 안드로이드(S22 Ultra)·아이패드·데스크톱에서 실기기 검증. 5건 신고: (1) 안드로이드에서만 IntroTyping → OpeningVideo 페이드 진입 시 '툭' 사운드 + 커다란 ▶️ 재생 아이콘. PM 판단 "수정 이전으로 돌리는 게 좋아 보임". 회전 모드 무관(portrait/landscape 모두). (2) MiniControls가 시나리오 진행 시에만 떠 — ModeSelect/Gallery에서도 햄버거 형태로. (3) <480px 폰트 더 줄여달라. 기본 14, 슬라이더로 더 줄일 수 있게. (4) 작은 폰 가로 모드(height ≤ 약 480px)에서 호감도 온도계가 화면 거의 가득, ModeSelect 타이틀 납작, 회상에서 다른 UI 가려짐. (5) 카톡/페북 OG 미리보기가 안 뜸.
+
+- **(1) OrientationLock — JS state 의존 0으로 회귀 회피**:
+  - **수정**: `src/ui/OrientationLock.tsx` 1차 변경의 React `useState` + `matchMedia` 구독 + `sessionStorage` 플래그 전부 제거. JSX 정적만 리턴.
+  - **CSS 이전**: `src/styles/globals.css` `.orientation-lock-overlay`에 미디어 쿼리(`pointer:coarse + portrait`) + `@keyframes orientation-toast-flash` 2.2s 페이드(visibility hidden ↔ visible) 직접 적용. 매번 portrait 진입 시 토스트 잠시 보이고 자동 hidden. JS re-render 없음 → 안드로이드 OP 페이드와의 간섭 가능성 0.
+  - **트레이드오프**: 1차의 "세션당 1회만" 제약 포기 — portrait↔landscape 전환 시마다 토스트. 안드로이드 회귀 회피가 우선.
+  - **검증 필요**: PM 실기기 안드로이드에서 '툭'+▶️ 사라졌는지 재확인. 만약 여전하면 원인이 OrientationLock과 무관 — App.tsx fontSize useEffect 또는 다른 변경 추적 필요.
+
+- **(2) MiniControls — `mode` prop 도입 + ModeSelect/Gallery 마운트**:
+  - **수정**: `src/ui/MiniControls.tsx`에 `mode?: 'scene' | 'minimal'` prop 추가. `scene` 기본: Log/Gallery/Menu/← 이전 + 환경설정/음소거/전체화면. `minimal`: 환경설정/음소거/전체화면만(시나리오 외 화면용).
+  - **마운트**: `src/App.tsx` ModeSelect 옆에 `<MiniControls mode="minimal" />` 추가. `src/ui/gallery/GalleryScreen.tsx`에도 동일. PC(우하단)/모바일(우상단 햄버거 ☰) 분기는 그대로 — 햄버거 형태 동일 패턴.
+  - **부수**: `src/engine/SceneRenderer.tsx` line 134 MiniControls 마운트 조건에 `runtimeMode !== 'idle'` 추가 — 부팅 직후 ModeSelect와 SceneRenderer가 동시 마운트되면서 MiniControls 두 개 겹치는 회귀 방지.
+
+- **(3) 폰트 슬라이더 MIN 14 → 10 + <480px 기본 14**:
+  - **수정**: `src/stores/settingsStore.ts` `FONT_SIZE_MIN: 14 → 10`. `FONT_SIZE_MAX/DEFAULT` 유지(30/26). 사용자가 슬라이더로 10까지 내릴 수 있음.
+  - **tokens.css**: ≤480px 룰의 폰트 토큰 `19/21/18 → 14/16/13`. `--textbox-padding: 14px 18px → 12px 14px` 약간 더 압축. SettingsScreen 슬라이더는 `FONT_SIZE_MIN` 상수 참조라 자동 갱신.
+
+- **(4) 작은 폰 가로 모드(height ≤ 480px + landscape) — 전용 미디어 쿼리 + 컴포넌트별 보정**:
+  - **tokens.css**: `@media (max-height: 480px) and (orientation: landscape)` 블록 신규. `--therm-scale: 0.55 → 0.35` (온도계 한 단 더 축소). `--toast-base-top/right: 8px/12px` (AffectionToast 우상단 기준점 — JS 상수 대신 CSS var). 대사창 `--textbox-height: 28% → 40%` (짧은 화면에서 비율 더 키워 가독성).
+  - **AffectionToastStack.tsx**: 기존 JS 상수 `TOAST_BASE_TOP=24, TOAST_BASE_RIGHT=32`가 inline `top/right`로 직접 적용되던 걸 `var(--toast-base-top, 24px)` / `calc(var(--toast-base-right, 32px) + …)` 로 우회. tokens.css 가로 모드 룰에서 박은 값이 적용됨. RichToastCardProps `top/right` 타입 `number → string` 변경.
+  - **globals.css**: `[data-testid='mode-select'] .title-float` 가로 모드 룰 — `min-height: 120px; max-height: 180px; width: auto`로 짧은 화면에서 타이틀 절대 크기 보장(이전엔 `max-h-full`이 부모 높이에 묶여 너무 작아짐).
+  - **회상 온도계만 보임 문제**: AffectionToastStack은 `overlayOpen` 체크로 모달 열렸을 때 null 반환. Gallery는 z-modal(300) < z-toast(400)라 이론상 토스트가 위 — 사용자가 본 건 *이미 활성 중인 토스트가 Gallery 열고도 잔존*. `--therm-scale: 0.35`로 전체 카드 축소되어 점유율 ~1/9로 감소 → 다른 UI 가림 완화. 추가 회귀 신고 시 z-index 재정렬 또는 모달 열릴 때 토스트 강제 종료 처방 검토.
+
+- **(5) OG 미리보기 — 절대 URL + og:url 명시**:
+  - **수정**: `index.html` `og:image` / `twitter:image` 상대경로(`./img/title-og.webp`) → 절대 URL(`https://jonathanblackdoctor.github.io/Cuyeonsi-beta/img/title-og.webp`). `og:url` 신규 추가 — 카톡/페북 크롤러가 상대경로 해석 못 하는 경우 미리보기 누락 원인.
+  - **PM 후속**: GitHub Pages 절대 URL 추정값 사용. 커스텀 도메인 적용 시 PM이 두 줄 교체. 카톡 캐시 무효화 트릭 — 디버거 갱신 또는 새 메시지로 링크 재전송.
+
+- **검증** (preview port 5175):
+  - 412×915 portrait: `--font-size-text: 14px ✓, --therm-scale: 0.55 ✓, --toast-base-top: 16px ✓`.
+  - 915×412 landscape(작은 폰 가로): `mediaShortLandscape: true ✓, --therm-scale: 0.35 ✓, --toast-base-top: 8px ✓, --toast-base-right: 12px ✓, --textbox-height: 40% ✓`.
+  - 1280×800 데스크톱 ModeSelect: `[data-testid="fullscreen-button"]` 1개만 마운트(이전 SceneRenderer 동시 마운트로 2개 겹침 → 가드 후 1개).
+  - 시나리오 진입(prologue_01_home): MiniControls scene 모드(Log/Gallery/Menu 포함) 정상.
+  - Gallery 열기: minimal MiniControls만(⛶/⚙/🔊), 시나리오용 버튼 빠짐 ✓.
+  - 콘솔/서버 에러 0건.
+  - 안드로이드 OP 회귀: dev 환경에선 재현 불가(실기기 Android Chrome 필요). PM이 안드로이드 다시 검증해야 함.
+
+- **모듈 (status: review)**:
+  - `index.html` (OG 절대 URL).
+  - `src/ui/OrientationLock.tsx` (JS 제거).
+  - `src/styles/globals.css` (CSS animation 토스트 + ModeSelect 타이틀 가로 룰).
+  - `src/ui/MiniControls.tsx` (`mode` prop).
+  - `src/App.tsx` (ModeSelect 위 minimal MiniControls).
+  - `src/ui/gallery/GalleryScreen.tsx` (minimal MiniControls).
+  - `src/engine/SceneRenderer.tsx` (idle 가드).
+  - `src/stores/settingsStore.ts` (`FONT_SIZE_MIN: 10`).
+  - `src/styles/tokens.css` (480px 폰트 14/16/13 + max-height 480 landscape 룰).
+  - `src/ui/affection/AffectionToastStack.tsx` (toast-base CSS var 우회).
+
+- **PM 후속**:
+  1. **안드로이드 OP 회귀 재검증** — 이 변경으로 '툭'+▶️이 사라졌는지. 여전하면 OrientationLock과 무관 → 다른 변경(App.tsx fontSize useEffect, tokens.css 480 등) 단계별 롤백으로 원인 좁히기.
+  2. **작은 폰 가로 모드 시각 확인** — S22 Ultra 가로(915×412)에서 온도계/타이틀/회상 비율 OK인지.
+  3. **OG 절대 URL — 실배포 URL 확인 + 카톡 캐시 갱신** — 추정 `https://jonathanblackdoctor.github.io/Cuyeonsi-beta/`. 커스텀 도메인 적용 시 `index.html` line 21·26 두 줄 교체.
+
+- **승인**: PM 직접 (2026-05-11 채팅, AskUserQuestion 4건 회답 + 실기기 5건 신고).
+
 ### 2026-05-11 — 모바일 QA 처방 4건 (OG 썸네일 / portrait 토스트 / 전체화면 버튼 / 480px 비율)
 
 - **변경 배경**: PM이 안드로이드 S22 Ultra + 아이패드 + 데스크톱에서 모바일 QA. 4건 신고: (1) 공유 링크 카톡 썸네일이 절반만 보임 (2) 세로 모드에서 "가로로 회전" 풀스크린 락이 답답 — 진행은 되되 추천만 (3) 모바일 브라우저 UI가 게임 가림 — 전체화면 버튼 필요 (4) S22 Ultra(412×915) 같은 작은 폰에서 대사창/온도계 비율 깨짐 (아이패드는 OK). PM AskUserQuestion 4개 결정: (1) OG 1200×630 별도 자산 + 메타 (2) 세션 첫 진입 1회만 2초 토스트 (3) MiniControls에 별도 버튼 (4) 480px 전용 브레이크포인트 추가.

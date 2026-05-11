@@ -5,7 +5,9 @@
  * - 모바일 (< 768px): 우상단 햄버거 토글 → 세로 메뉴
  * - 터치 영역 ≥44×44px (iOS HIG / QA-PLAN §1.3)
  *
- * Auto/Skip은 W5에서 텍스트 진행 모듈과 연동. 본 라운드는 Log/Menu/Gallery만 작동.
+ * 모바일 QA 2026-05-11 처방: `mode` prop
+ * - `scene` (기본): 시나리오 진행 중 — 환경설정/음소거/전체화면 + Log/Gallery/Menu/← 이전.
+ * - `minimal`: ModeSelect, Gallery 등 시나리오 외 화면 — 환경설정/음소거/전체화면만.
  */
 
 import { useEffect, useState } from 'react';
@@ -66,7 +68,12 @@ function FullscreenButton() {
   );
 }
 
-export function MiniControls() {
+interface MiniControlsProps {
+  /** 'scene' (기본): 시나리오 — 모든 버튼. 'minimal': ModeSelect/Gallery — 환경설정/음소거/전체화면만. */
+  mode?: 'scene' | 'minimal';
+}
+
+export function MiniControls({ mode = 'scene' }: MiniControlsProps = {}) {
   const setBacklog = useGameStore((s) => s.setBacklogOpen);
   const setMenu = useGameStore((s) => s.setPauseMenuOpen);
   const setGallery = useGameStore((s) => s.setGalleryOpen);
@@ -74,12 +81,15 @@ export function MiniControls() {
   const canRewind = useGameStore((s) => s.runtimeMode === 'scene' && s.textCommandStack.length > 0);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-  const buttons: Array<{ label: string; onClick: () => void; disabled?: boolean }> = [
-    { label: '← 이전', onClick: () => void rewindOne(), disabled: !canRewind },
-    { label: 'Log', onClick: () => setBacklog(true) },
-    { label: 'Gallery', onClick: () => setGallery(true) },
-    { label: 'Menu', onClick: () => setMenu(true) },
-  ];
+  const buttons: Array<{ label: string; onClick: () => void; disabled?: boolean }> =
+    mode === 'scene'
+      ? [
+          { label: '← 이전', onClick: () => void rewindOne(), disabled: !canRewind },
+          { label: 'Log', onClick: () => setBacklog(true) },
+          { label: 'Gallery', onClick: () => setGallery(true) },
+          { label: 'Menu', onClick: () => setMenu(true) },
+        ]
+      : [];
 
   const fire = (cb: () => void) => {
     audioManager.playSfx('sfx_pageturn', { volume: 0.7 });

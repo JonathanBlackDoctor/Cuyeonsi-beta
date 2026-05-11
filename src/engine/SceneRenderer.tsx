@@ -131,7 +131,9 @@ export function SceneRenderer() {
       <ChapterFader />
       <ChapterTransitionRecap />
 
-      {!isBacklogOpen && !isPauseMenuOpen && !isGalleryOpen && <MiniControls />}
+      {/* idle 모드(부팅 직후 ModeSelect 동시 마운트 시점)에는 표시 X — App.tsx가 minimal MiniControls 띄움.
+          모바일 QA 2026-05-11 2차: ModeSelect/Gallery에 minimal MiniControls 도입으로 두 개 겹침 방지. */}
+      {runtimeMode !== 'idle' && !isBacklogOpen && !isPauseMenuOpen && !isGalleryOpen && <MiniControls />}
       {(runtimeMode === 'scene' || runtimeMode === 'kakao' || runtimeMode === 'cg')
         && !isBacklogOpen && !isPauseMenuOpen && !isGalleryOpen
         && <AutoPlayButton />}

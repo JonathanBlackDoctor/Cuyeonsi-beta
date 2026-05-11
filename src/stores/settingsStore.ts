@@ -17,11 +17,11 @@ export type StoryMode = 'full' | 'compressed' | 'palJeongPot';
  * UI-SPEC §8 폰트 크기 슬라이더 (2026-05-09 W5 메뉴 사이클 라운드).
  *
  * 2026-05-10 정정: 범위 12~22 → 14~30, 기본 16 → 26.
- * tokens.css의 `--font-size-text` PC 기본 26px / 모바일 22px 정합 보존.
- * App.tsx가 store 변동 시 CSS var를 매 마운트 박아넣으므로,
- * 기본값을 26으로 두지 않으면 사용자가 슬라이더를 만지지 않아도 글자가 작아짐.
+ * 2026-05-11 모바일 QA 정정: MIN 14 → 10. 작은 폰(<480px)에서 사용자가 더 줄일 수 있도록.
+ *   기본값 26 유지 — App.tsx가 fontSize === FONT_SIZE_DEFAULT 시 inline 제거 → tokens.css 룰 위임
+ *   (≤480px 14 / ≤768px 22 / 기본 26). 슬라이더로 변경 시만 그 값이 모든 viewport 우선.
  */
-export const FONT_SIZE_MIN = 14;
+export const FONT_SIZE_MIN = 10;
 export const FONT_SIZE_MAX = 30;
 export const FONT_SIZE_DEFAULT = 26;
 

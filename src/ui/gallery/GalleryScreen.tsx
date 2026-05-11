@@ -10,6 +10,7 @@ import { CGGallery } from './CGGallery';
 import { BGMGallery } from './BGMGallery';
 import { EndingGallery } from './EndingGallery';
 import { SpriteGallery } from './SpriteGallery';
+import { MiniControls } from '@/ui/MiniControls';
 
 type Tab = 'ending' | 'cg' | 'sprite' | 'bgm';
 
@@ -57,6 +58,9 @@ export function GalleryScreen() {
         {tab === 'bgm' && <BGMGallery />}
         {tab === 'ending' && <EndingGallery />}
       </div>
+
+      {/* 모바일 QA 2026-05-11: Gallery에도 환경설정/음소거/전체화면 접근 — minimal 모드. */}
+      <MiniControls mode="minimal" />
     </div>
   );
 }

@@ -170,8 +170,10 @@ export function AffectionToastStack() {
   return (
     <>
       {activeCards.map((card, idx) => {
-        const top = TOAST_BASE_TOP;
-        const right = TOAST_BASE_RIGHT + idx * (TOAST_CARD_W + TOAST_GAP);
+        // 모바일 QA 2026-05-11 2차: base top/right를 CSS var로 우회 — tokens.css의
+        // `@media (max-height: 480px) and (orientation: landscape)` 룰이 작은 폰 가로에서 더 작게 박음.
+        const top = `var(--toast-base-top, ${TOAST_BASE_TOP}px)`;
+        const right = `calc(var(--toast-base-right, ${TOAST_BASE_RIGHT}px) + ${idx * (TOAST_CARD_W + TOAST_GAP)}px)`;
         return <RichToastCard key={card.id} event={card} top={top} right={right} />;
       })}
     </>
@@ -180,8 +182,8 @@ export function AffectionToastStack() {
 
 interface RichToastCardProps {
   event: AffectionEvent;
-  top: number;
-  right: number;
+  top: string;
+  right: string;
 }
 
 function RichToastCard({ event, top, right }: RichToastCardProps) {

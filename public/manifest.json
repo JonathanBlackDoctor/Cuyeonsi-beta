@@ -35,6 +35,8 @@
     "윤하정": [
       "blush",
       "default",
+      "outfit_lab_coat",
+      "outfit_party",
       "pout",
       "serious",
       "smile_small",
@@ -46,6 +48,9 @@
     "김규민": [
       "default"
     ],
+    "표경민": [
+      "default"
+    ],
     "조나단": [
       "default"
     ],
@@ -54,24 +59,26 @@
       "concerned",
       "default",
       "no_glasses",
+      "outfit_casual",
+      "outfit_lab_late",
       "serious",
       "smile_slight",
       "tired",
       "warm_smile"
     ],
-    "표경민": [
-      "default"
-    ],
     "차세린": [
       "blush",
       "concerned",
       "default",
+      "outfit_casual",
+      "outfit_winter_coat",
       "smile",
-      "smile_warm",
       "tired"
     ],
     "장윤영": [
       "blush",
+      "outfit_dress",
+      "outfit_festival",
       "pout",
       "smile_big",
       "warm_smile"
@@ -79,6 +86,7 @@
     "나서윤": [
       "default",
       "distant",
+      "outfit_date",
       "smile_full",
       "smile_slight",
       "warm"
@@ -147,14 +155,18 @@
     "sfx_timer_out"
   ],
   "_meta": {
-    "generatedAt": "2026-05-08T08:55:17.842Z",
-    "sceneCount": 216,
+    "generatedAt": "2026-05-11T00:42:35.559Z",
+    "sceneCount": 212,
     "registered": {
       "bg": 17,
       "sprite": 58,
       "cg": 20,
       "video": 12
     },
-    "notes": []
+    "notes": [
+      "미등록 BG (시나리오 사용): bg_campus_cafe_night",
+      "미등록 BG (시나리오 사용): bg_biochem_lab_night",
+      "미등록 BG (시나리오 사용): bg_cafe_serin"
+    ]
   }
 }
