@@ -67,6 +67,9 @@ export interface EndingScoreBreakdown {
   bestSonActive: boolean;         // mom max
   taehoBestActive: boolean;       // taeho max
   junhyukActive: boolean;         // junhyuk max
+
+  // 팔정팟 미니게임 보너스 (-50..+50, 비-팔정팟이면 0)
+  minigameBonus: number;
 }
 
 export interface EndingScore {
@@ -150,7 +153,11 @@ export const GRADE_CUTS: Readonly<Record<EndingGrade, number>> = {
   D: 0,
 };
 
-export function computeEndingScore(flags: GameFlags, endingId: EndingId): EndingScore {
+export function computeEndingScore(
+  flags: GameFlags,
+  endingId: EndingId,
+  minigameBonus: number = 0,
+): EndingScore {
   const meta = findEnding(endingId);
   const winner = meta?.heroine ?? null;
   const category = meta?.category ?? null;
@@ -213,8 +220,8 @@ export function computeEndingScore(flags: GameFlags, endingId: EndingId): Ending
   const friendBonusMultiplier = friendBonusActive ? 1.3 : 1.0;
   const friendSum = friendSumRaw * friendBonusMultiplier;
 
-  // 최종
-  const finalScore = hTotal + friendSum + perPerson.mom + perPerson.taeho;
+  // 최종 (팔정팟 미니게임 보너스 포함, 비-팔정팟이면 0)
+  const finalScore = hTotal + friendSum + perPerson.mom + perPerson.taeho + minigameBonus;
 
   // 등급
   const grade: EndingGrade =
@@ -253,6 +260,7 @@ export function computeEndingScore(flags: GameFlags, endingId: EndingId): Ending
       bestSonActive,
       taehoBestActive,
       junhyukActive,
+      minigameBonus,
     },
     hiddenBonusLabels,
   };

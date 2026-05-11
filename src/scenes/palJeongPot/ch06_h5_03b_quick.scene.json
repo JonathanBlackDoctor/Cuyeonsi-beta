@@ -1,0 +1,31 @@
+{
+  "id": "ch06_h5_03b_quick",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h5_morning",
+      "value": "quick"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어, 부담은 안 둬도 돼."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "알겠어요! 강의 가볼게요!"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h5_03_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-05 morning",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

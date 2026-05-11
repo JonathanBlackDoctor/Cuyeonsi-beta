@@ -1,0 +1,46 @@
+{
+  "id": "ch06_h4_04_close",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_dongseong_street",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "나서윤",
+      "text": "오늘 시간 잘 보냈어요."
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "나서윤",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h4_05_late_kakao"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-13 saturday afternoon",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

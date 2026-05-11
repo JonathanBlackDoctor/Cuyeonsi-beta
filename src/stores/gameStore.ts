@@ -44,9 +44,15 @@ const interpreter = new ScriptInterpreter();
 const _stepNullWarnedScenes = new Set<string>();
 // startScene 동시 호출 차단 mutex — 빠른 advance 연타로 JUMP cmd가 중복 step되거나
 // safety reseek(0)이 옛 씬에서 다시 JUMP에 도달해 두 번째 startScene이 시작되는 race를 차단.
-// 첫 호출이 진행 중일 때 들어온 추가 호출은 noop (의도된 다음 sceneId는 첫 호출과 동일하거나
-// 이미 첫 호출 중에 처리되는 시나리오라 무시 안전).
+//
+// 2026-05-12 정정: 첫 호출 진행 중에 들어온 추가 호출을 noop으로 silent drop하면
+// "텍스트 없는 짧은 씬(CHARACTER_HIDE×N → BGM_STOP → JUMP)"이 SceneRenderer의 시각-명령 auto-advance
+// 체인으로 즉시 JUMP까지 도달했을 때, 외부 startScene이 챕터 fade-out 중(=mutex held)이면
+// 이 JUMP의 nested startScene이 silent drop되어 interpreter 인덱스 past-end → step null 무한 루프.
+// 팔정팟 각색본은 지문/모놀로그 삭감으로 이런 짧은 씬이 풀/압축보다 흔해 본 회귀가 노출됨.
+// 처방: bail 대신 last-write-wins 큐로 보관 → 첫 호출의 finally에서 chain.
 let _startSceneInFlight = false;
+let _queuedStartSceneId: string | null = null;
 
 // 선택지 더블클릭 방지 — 첫 pickChoice 완료 전 추가 호출은 noop.
 let _pickChoiceInFlight = false;
@@ -182,6 +188,12 @@ interface RuntimeState {
   saveLoadMode: 'save' | 'load' | null;
   /** SettingsScreen 노출 여부 (휘발성, persist 제외). */
   isSettingsOpen: boolean;
+  /**
+   * 팔정팟 각색본 한정 미니게임 보너스 점수 (-50 ~ +50).
+   * null = 아직 미실행. 엔딩 화면 진입 시 MiniGameGate가 결정, computeEndingScore에 가산.
+   * 휘발성(persist 제외) — 한 회차 안에서만 유효.
+   */
+  minigameBonus: number | null;
 }
 
 interface Actions {
@@ -214,6 +226,9 @@ interface Actions {
 
   /** ChapterStartPrompt 버튼이 호출. 보관된 resolve 실행 + state clear → startScene 흐름 재개. */
   confirmChapterAdvance: () => void;
+
+  /** 팔정팟 미니게임 결과 보너스(-50..+50) 저장. 엔딩 점수 계산 시 가산. */
+  setMinigameBonus: (bonus: number) => void;
 }
 
 type GameState = RuntimeState & Actions;
@@ -241,6 +256,7 @@ const initialRuntime = (): RuntimeState => ({
   isGalleryOpen: false,
   saveLoadMode: null,
   isSettingsOpen: false,
+  minigameBonus: null,
 });
 
 function applyEffects(state: RuntimeState, effects: SceneCommand[] | undefined): RuntimeState {
@@ -587,10 +603,13 @@ export const useGameStore = create<GameState>()(
       ...initialRuntime(),
 
       async startScene(sceneId: string) {
-        // mutex: 첫 호출이 진행 중이면 noop. 빠른 클릭 연타로 advance 안의 await get().startScene이
-        // 중첩 호출되거나, safety reseek(0)이 옛 씬에서 다시 JUMP에 도달해 두 번째 호출이 시작되는
-        // race를 차단. (2026-05-09 회상 안 뜨는 회귀 처방.)
-        if (_startSceneInFlight) return;
+        // mutex: 첫 호출이 진행 중이면 last-write-wins 큐에 보관 후 return.
+        // 첫 호출 finally에서 큐가 비어있지 않으면 다음 sceneId로 chain.
+        // (2026-05-09 race 차단 + 2026-05-12 nested-JUMP silent drop 회귀 처방.)
+        if (_startSceneInFlight) {
+          _queuedStartSceneId = sceneId;
+          return;
+        }
         _startSceneInFlight = true;
         try {
         const prevSceneId = get().currentSceneId;
@@ -667,6 +686,13 @@ export const useGameStore = create<GameState>()(
         }
         } finally {
           _startSceneInFlight = false;
+          // 큐에 보관된 다음 sceneId가 있고 현재 씬과 다르면 chain 호출.
+          // 동일 sceneId면 무시(safety reseek 등 의도되지 않은 자기 자신 큐는 no-op).
+          const queued = _queuedStartSceneId;
+          _queuedStartSceneId = null;
+          if (queued && queued !== get().currentSceneId) {
+            void get().startScene(queued);
+          }
         }
       },
 
@@ -1127,6 +1153,11 @@ export const useGameStore = create<GameState>()(
       confirmChapterAdvance() {
         const resolve = get()._chapterAdvanceResolve;
         if (resolve) resolve();
+      },
+
+      setMinigameBonus(bonus: number) {
+        const clamped = Math.max(-50, Math.min(50, Math.round(bonus)));
+        set({ minigameBonus: clamped });
       },
     }),
     {

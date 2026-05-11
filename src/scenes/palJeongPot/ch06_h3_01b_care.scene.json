@@ -1,0 +1,38 @@
+{
+  "id": "ch06_h3_01b_care",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h3_booth",
+      "value": "care"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "부스는 본과 1학년 자리니까 길게 안 머무셔도 돼요. 박사 5년차 본업 챙기시는 게 우선이에요."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "smile_slight",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "학생이 그렇게 챙겨주는 거 의외예요. 그럼 십 분만 더 있다 갈게요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h3_01_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-02 afternoon",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "ch02_02_after_choice",
+  "commands": [
+    {
+      "type": "CG",
+      "image": "cg_hajeong_anatomy",
+      "cgId": "cg_hajeong_anatomy"
+    },
+    {
+      "type": "NARRATION",
+      "text": "마스크 흘러내린 채로 윤하정이 옆을 흘끗 본다. 경멸하는 듯한 시선이 잠시 마주친다."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "이태호",
+      "text": "자, 5조부터 차례로 봅시다."
+    },
+    {
+      "type": "MONOLOGUE",
+      "speaker": "구윤모",
+      "text": "봤다. 마음에 새겼다."
+    },
+    {
+      "type": "NARRATION",
+      "text": "한 시간 뒤. 첫 실습 끝."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "이태호",
+      "text": "일찍 마쳐드렸으니 조원들끼리 술 한잔 하세요 ^^"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 3
+    },
+    {
+      "type": "BG",
+      "image": "bg_kmu_main"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "serious",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤하정",
+      "sprite": "serious",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "NARRATION",
+      "text": "본관 앞. 햇볕."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "야. ...자꾸 말걸지 말아줄래. 태호쌤 생각나잖아."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "너는나를존중해야한다6년연임과대를할남자이며동기들을다재끼고메니스회장에등극한(생략)"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤하정",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch02_03_biochem_lab"
+    }
+  ],
+  "meta": {
+    "chapter": 2,
+    "time": "2026-03-16 morning, anatomy lab",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

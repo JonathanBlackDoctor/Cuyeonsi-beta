@@ -1,0 +1,144 @@
+{
+  "id": "ch01_03_kakao_evening",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_studio_room",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_katalk",
+      "volume": 0.4,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "같은 날 저녁. 자취방."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "김규민",
+          "text": "윤모 임마는 무슨 오티에서 짖고있냐"
+        },
+        {
+          "sender": "조나단",
+          "text": "너답더라"
+        },
+        {
+          "sender": "구윤모",
+          "text": "즉흥이라 했잖아"
+        },
+        {
+          "sender": "표경민",
+          "text": "잘 짖긴하더라"
+        },
+        {
+          "sender": "김규민",
+          "text": "5조 누구누구임?"
+        },
+        {
+          "sender": "구윤모",
+          "text": "윤하정 오준혁 이문규 정욱"
+        },
+        {
+          "sender": "김규민",
+          "text": "오준혁? 남자 같은데"
+        },
+        {
+          "sender": "구윤모",
+          "text": "여자임"
+        },
+        {
+          "sender": "표경민",
+          "text": "너네 진짜 실례임"
+        },
+        {
+          "sender": "김규민",
+          "text": "윤하정은?"
+        },
+        {
+          "sender": "구윤모",
+          "text": "부산이라던데. 얌전함.  좀 이쁘긴하던데"
+        }
+      ]
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "NARRATION",
+      "text": "1:1 카톡방. \"윤하정\"."
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "윤하정",
+          "text": "야 내일 강의 자료 받았어?"
+        },
+        {
+          "sender": "구윤모",
+          "text": "어. 내가 포워딩 할까?"
+        },
+        {
+          "sender": "윤하정",
+          "text": "어, 부탁"
+        },
+        {
+          "sender": "구윤모",
+          "text": "보냈어"
+        },
+        {
+          "sender": "윤하정",
+          "text": "고마워. 내일 봐"
+        },
+        {
+          "sender": "구윤모",
+          "text": "어 잘 자"
+        }
+      ]
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch01_04_first_lecture"
+    }
+  ],
+  "meta": {
+    "chapter": 1,
+    "time": "2026-03-02 evening",
+    "activeHeroines": [
+      "H2",
+      "gyumin",
+      "gyeongmin",
+      "nathan",
+      "wook",
+      "junhyuk"
+    ]
+  }
+}

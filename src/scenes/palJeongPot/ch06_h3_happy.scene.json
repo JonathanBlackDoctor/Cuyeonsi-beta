@@ -1,0 +1,85 @@
+{
+  "id": "ch06_h3_happy",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_biochem_lab_night"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 14일 밤. 실험실."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "tired",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "CG",
+      "image": "cg_seol_late_night",
+      "cgId": "cg_seol_late_night"
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "사람으로 옆에 있고 싶다고 한 말. 아직 답이 정리되진 않았어요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네. 답은 답대로 두시고요. 다음 학기에도 잘 부탁드린다는 한마디면 충분합니다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "학생이 흘려보낸 그 한마디, 마음에 두고 갈게요."
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "BG",
+      "image": "black"
+    },
+    {
+      "type": "NARRATION",
+      "text": "— 끝."
+    },
+    {
+      "type": "NARRATION",
+      "text": "**한설 해피 엔딩 — 실험실의 밤**"
+    },
+    {
+      "type": "ENDING",
+      "endingId": "END_H3_HAPPY"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-14 night",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

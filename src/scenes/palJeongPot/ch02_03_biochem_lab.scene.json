@@ -1,0 +1,128 @@
+{
+  "id": "ch02_03_biochem_lab",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_anatomy_lab",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "다음 날 오후. 첫 생화학 실험."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "여러분 이 experiment 하는 법 알아요 몰라요? 배웠어요? 아직은 question mark가 있어요? 빨리 말해주세요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "이거 잘못 넣으면 실험 results가 잘못 나오니 꼭 label을 두번 확인해줘요."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "serious",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "시약병 두 손으로 받쳐서 들어주세요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네, 알겠습니다."
+    },
+    {
+      "type": "NARRATION",
+      "text": "윤모가 시약을 마신다. 이를 하은설 교수님이 저지하려다 시약병이 부딪친다."
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_glass_drop",
+      "volume": 0.6
+    },
+    {
+      "type": "NARRATION",
+      "text": "시약병이 바닥에 깨진다."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "panic",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "serious",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "조심한다고 했어요 안했어요? 실험실 수칙 알아요 몰라요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네... 죄송합니다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "오준혁",
+      "text": "아오 윤모시치야!!"
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "정말 죄송합니다. 생화학 교실에 들어가서 갚을게요.",
+          "next": "ch02_03b_apologize",
+          "tone": "warm_supportive",
+          "isKey": true,
+          "descriptor": "ch2_apology"
+        },
+        {
+          "text": "죄송합니다.",
+          "next": "ch02_03b_quick",
+          "tone": "mature_serious"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 2,
+    "time": "2026-03-17 afternoon",
+    "activeHeroines": [
+      "H2",
+      "H3"
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "id": "ch06_h3_03_late_night_lab",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_biochem_lab_night",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.3,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "새벽 1시. 도서관 한 챕터 끝내고 실험실로."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "김규민",
+          "text": "야 윤모 어디"
+        },
+        {
+          "sender": "구윤모",
+          "text": "편의점"
+        },
+        {
+          "sender": "김규민",
+          "text": "새벽인데"
+        },
+        {
+          "sender": "구윤모",
+          "text": "야식 사러"
+        },
+        {
+          "sender": "김규민",
+          "text": "ㅋㅋㅋㅋ 비밀ㅋ"
+        }
+      ]
+    },
+    {
+      "type": "NARRATION",
+      "text": "편의점에서 김밥 두 줄, 캔커피, 컵라면."
+    },
+    {
+      "type": "BG",
+      "image": "bg_biochem_lab_night",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "tired",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "NARRATION",
+      "text": "실험실. 한설. 안경 내려놓은 채."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "11시쯤이라 했는데 1시 넘었네요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "한 챕터 더 정리하다 늦었어요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "김밥 6줄, 컵라면 4개, 족발 2개, 핫바 4개 규민이랑 사고왔어요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "어떻게 알았어요. 끓이다 그릇만 두고 데이터로 돌아간 거."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "컵라면 모양이 끓이다 만 모양이고요."
+    },
+    {
+      "type": "FLAG_INC",
+      "key": "H3",
+      "delta": 5
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "박사 5년차한테 학생이 야식 챙겨주는 거 처음이에요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "선생님이랑 키스하고싶어서 미리 뇌물좀 드릴려고요 ㅎㅎ"
+    },
+    {
+      "type": "FLAG_INC",
+      "key": "H3",
+      "delta": 5
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "CG",
+      "image": "cg_seol_late_night",
+      "cgId": "cg_seol_late_night"
+    },
+    {
+      "type": "NARRATION",
+      "text": "새벽 1시 실험실. 한설. 머그잔을 두 손으로. 안경 없이. 풀어진 표정."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "저도 윤모씨 보면 끌어안고 싶다는 생각이 맨날 들어요."
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "학생이 아니라 사람으로 옆에 있고 싶어요",
+          "next": "ch06_h3_03b_honest",
+          "tone": "warm_supportive",
+          "isKey": true,
+          "descriptor": "ch6_h3_late_night_honest"
+        },
+        {
+          "text": "선생님 풀어진 모습 의외로 자연스러우세요",
+          "next": "ch06_h3_03b_safe",
+          "tone": "warm_supportive"
+        },
+        {
+          "text": "학생-조교 자리는 학생-조교니까요",
+          "next": "ch06_h3_03b_distant",
+          "tone": "mature_serious"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-03 dawn 1am",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

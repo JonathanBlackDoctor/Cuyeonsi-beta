@@ -1,0 +1,133 @@
+{
+  "id": "ch06_h2_true",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_dongdaegu_station"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_climax",
+      "volume": 0.6,
+      "fade": 4
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 27일 오전. 동대구역. 부산행 KTX."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤하정",
+      "sprite": "warm_smile",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "VIDEO",
+      "src": "video_true_hajeong"
+    },
+    {
+      "type": "CG",
+      "image": "cg_hajeong_true",
+      "cgId": "cg_hajeong_true"
+    },
+    {
+      "type": "NARRATION",
+      "text": "동대구역 플랫폼. 윤하정이 캐리어 옆에서 한 손을 든다. 햇살에 머리가 흩날리고, 따뜻한 미소."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "야."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "11시 정각."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "5분 늦게 와도 됐는데."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "오늘은 키스연습 좀 덜했다 ㅎㅎ"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "…연습좀 더 하고오지"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "여름방학 끝나고 보자. 같이 견디는 식으로 가자."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어. 같이 가자."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "...부산 한 번 와줘."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "그래. 갈게."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "갈게. 윤모."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어. 잘 다녀와."
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_climax",
+      "volume": 0.7,
+      "fade": 2
+    },
+    {
+      "type": "BG",
+      "image": "black"
+    },
+    {
+      "type": "NARRATION",
+      "text": "— 끝."
+    },
+    {
+      "type": "NARRATION",
+      "text": "**윤하정 트루 엔딩 — 동기의 봄**"
+    },
+    {
+      "type": "ENDING",
+      "endingId": "END_H2_TRUE"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-27 morning",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "ch06_h4_04b_direct",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h4_date",
+      "value": "direct"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "한 번 더 봬도 될까요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "나서윤",
+      "text": "직진은 직진이네요. 천천히 할게요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h4_04_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-13 saturday afternoon",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

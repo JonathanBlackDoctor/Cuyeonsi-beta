@@ -1,0 +1,31 @@
+{
+  "id": "ch06_h2_03b_extend_quick",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h2_walk",
+      "value": "quick"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어, 다음에 가자."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "...뭐, 그래도 잠깐 더 걷긴 하자."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h2_03_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-01 night",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

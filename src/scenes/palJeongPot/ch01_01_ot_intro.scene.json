@@ -1,0 +1,62 @@
+{
+  "id": "ch01_01_ot_intro",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_lecture_day",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.6,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "3월 2일 오전. 본과 1학년 OT. 강의실 50명."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "학생회 임원",
+      "text": "과대 짧게 인사 한번 부탁할게요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "안녕하세요. 과대 구윤모입니다. 길게는 안 끌게요. 저 구윤모 여러분들의 개가 되겠습니다 멍멍 잘 부탁드리겠습니다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "학생회 임원",
+      "text": "해부조 배정 발표하겠습니다."
+    },
+    {
+      "type": "MONOLOGUE",
+      "speaker": "구윤모",
+      "text": "5조... 윤하정, 오준혁, 이문규, 정욱."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch01_02_meet_hajeong"
+    }
+  ],
+  "meta": {
+    "chapter": 1,
+    "time": "2026-03-02 morning"
+  }
+}

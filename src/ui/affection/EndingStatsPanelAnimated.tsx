@@ -24,6 +24,7 @@ import { EndingLiquidBox } from './EndingLiquidBox';
 import { useEndingCountUp } from './useEndingCountUp';
 import { useEndingPhaseMachine } from './useEndingPhaseMachine';
 import { easeOutCubic } from './spring';
+import { useGameStore } from '@/stores/gameStore';
 
 const GRADE_COLOR: Record<EndingGrade, string> = {
   S: '#FFD86B',
@@ -61,7 +62,11 @@ export function EndingStatsPanelAnimated({
 }
 
 function AnimatedPanel({ flags, endingId }: { flags: GameFlags; endingId: EndingId }) {
-  const score = useMemo(() => computeEndingScore(flags, endingId), [flags, endingId]);
+  const minigameBonus = useGameStore((s) => s.minigameBonus);
+  const score = useMemo(
+    () => computeEndingScore(flags, endingId, minigameBonus ?? 0),
+    [flags, endingId, minigameBonus],
+  );
   const bd = score.breakdown;
   const winner = bd.winner;
   const gradeColor = GRADE_COLOR[score.grade];

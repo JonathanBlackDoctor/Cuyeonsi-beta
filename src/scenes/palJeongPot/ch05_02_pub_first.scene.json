@@ -1,0 +1,121 @@
+{
+  "id": "ch05_02_pub_first",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_dongseong_street",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.6,
+      "fade": 2
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_bar_ambient",
+      "volume": 0.4
+    },
+    {
+      "type": "NARRATION",
+      "text": "동성로 술집. 다섯 명이 한 자리에 다 있다."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "차세린 선생님 쪽으로",
+          "next": "ch05_02b_h1",
+          "effects": [
+            {
+              "type": "FLAG_INC",
+              "key": "H1",
+              "delta": 25
+            },
+            {
+              "type": "KEY_CHOICE",
+              "heroine": "H1",
+              "choiceId": "ch5_join"
+            }
+          ]
+        },
+        {
+          "text": "윤하정 옆으로",
+          "next": "ch05_02b_h2",
+          "effects": [
+            {
+              "type": "FLAG_INC",
+              "key": "H2",
+              "delta": 25
+            },
+            {
+              "type": "KEY_CHOICE",
+              "heroine": "H2",
+              "choiceId": "ch5_join"
+            }
+          ]
+        },
+        {
+          "text": "한설 선생님 쪽으로",
+          "next": "ch05_02b_h3",
+          "effects": [
+            {
+              "type": "FLAG_INC",
+              "key": "H3",
+              "delta": 25
+            },
+            {
+              "type": "KEY_CHOICE",
+              "heroine": "H3",
+              "choiceId": "ch5_join"
+            }
+          ]
+        },
+        {
+          "text": "나서윤씨 옆으로",
+          "next": "ch05_02b_h4",
+          "effects": [
+            {
+              "type": "FLAG_INC",
+              "key": "H4",
+              "delta": 25
+            },
+            {
+              "type": "KEY_CHOICE",
+              "heroine": "H4",
+              "choiceId": "ch5_join"
+            }
+          ]
+        },
+        {
+          "text": "장윤영 옆으로",
+          "next": "ch05_02b_h5",
+          "effects": [
+            {
+              "type": "FLAG_INC",
+              "key": "H5",
+              "delta": 25
+            },
+            {
+              "type": "KEY_CHOICE",
+              "heroine": "H5",
+              "choiceId": "ch5_join"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 5,
+    "time": "2026-05-11 evening"
+  }
+}

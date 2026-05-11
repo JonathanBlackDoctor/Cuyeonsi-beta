@@ -8,10 +8,10 @@
  * 8. 엔딩 크레딧 + 해금 토스트
  *
  * BGM(bgm_sad)·SFX(sfx_katalk_notify)는 scene.json의 BGM/SFX 명령이 처리.
+ * BGM은 8단계 끝까지 끊기지 않고 유지 — 타이틀 복귀 시 엔진이 자동 처리 (PM 2026-05-11 지시).
  */
 
 import { useEffect, useState } from 'react';
-import { audioManager } from '@/engine/audioManager';
 import { REJECT_STAGE_TIMING_MS } from '@/engine/rejectLines';
 
 interface Props {
@@ -33,7 +33,8 @@ export function RejectEnding({ onComplete }: Props) {
       return () => clearTimeout(t);
     }
     if (stage === 'video') {
-      audioManager.stopBgm({ fade: 4 });
+      // BGM 정지 안 함 — bgm_sad가 영상·크레딧·타이틀 복귀 직전까지 끊기지 않게 유지.
+      // audioManager.stopBgm은 무음 방지 폴백(bgm_daily 자동 복구)을 깨우므로 사용 금지.
       const t = setTimeout(() => setStage('toast'), REJECT_STAGE_TIMING_MS.video);
       return () => clearTimeout(t);
     }

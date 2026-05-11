@@ -1,0 +1,84 @@
+{
+  "id": "ch04_05_seoyoon_kakao",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_studio_room",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_katalk",
+      "volume": 0.4,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "같은 날 밤 11시. 자취방."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "NARRATION",
+      "text": "\"나서윤\" 1:1 카톡방."
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "나서윤",
+          "text": "안녕하세요. 낮에 승보한테 친추 받으셨다고 들었어요"
+        }
+      ]
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "나서윤",
+          "text": "본과 1학년 시험기간 힘들다고 들었어요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "시험 잘 보세요"
+        }
+      ],
+      "affectionDecay": {
+        "target": "H4",
+        "perSecond": 5
+      },
+      "choices": [
+        {
+          "text": "정중 인사 + 시험 응원",
+          "next": "ch04_05b_replied",
+          "tone": "warm_supportive",
+          "isKey": true,
+          "descriptor": "ch4_first_reply",
+          "mechanism": "h4_reply_speed"
+        },
+        {
+          "text": "ㅇㅇ 감사",
+          "next": "ch04_05b_short",
+          "tone": "direct_friendly",
+          "mechanism": "h4_reply_speed"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 4,
+    "time": "2026-04-29 night",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

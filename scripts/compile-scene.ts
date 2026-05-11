@@ -30,14 +30,15 @@ import { isKnownBgm, isKnownSfx, koToEnBgm, koToEnSfx } from '../src/engine/audi
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ─── 모드 분기 (2026-05-08) ─────────────────────────────────────
-// --mode=full (기본) → 03-story/scenarios/*.md → src/scenes/*.scene.json
-// --mode=compressed → 03-story/scenarios/compressed/*.md → src/scenes/compressed/*.scene.json
-type CompileMode = 'full' | 'compressed';
+// ─── 모드 분기 (2026-05-08, palJeongPot 추가 2026-05-11) ─────────
+// --mode=full (기본)   → 03-story/scenarios/*.md                       → src/scenes/*.scene.json
+// --mode=compressed    → 03-story/scenarios/compressed/*.md            → src/scenes/compressed/*.scene.json
+// --mode=palJeongPot   → 03-story/scenarios/palJeongPot/finished/*.md  → src/scenes/palJeongPot/*.scene.json
+type CompileMode = 'full' | 'compressed' | 'palJeongPot';
 const cliArgs = process.argv.slice(2);
 const modeArg = cliArgs.find((a) => a.startsWith('--mode='))?.split('=')[1] ?? 'full';
-if (modeArg !== 'full' && modeArg !== 'compressed') {
-  throw new Error(`--mode= must be 'full' or 'compressed' (got '${modeArg}')`);
+if (modeArg !== 'full' && modeArg !== 'compressed' && modeArg !== 'palJeongPot') {
+  throw new Error(`--mode= must be 'full' | 'compressed' | 'palJeongPot' (got '${modeArg}')`);
 }
 const MODE: CompileMode = modeArg as CompileMode;
 
@@ -127,12 +128,17 @@ interface CompileStats {
 }
 
 const ROOT = path.resolve(__dirname, '..');
-const SCENARIO_DIRS =
-  MODE === 'full'
-    ? [path.join(ROOT, '03-story/scenarios')]
-    : [path.join(ROOT, '03-story/scenarios/compressed')];
-const OUT_DIR =
-  MODE === 'full' ? path.join(ROOT, 'src/scenes') : path.join(ROOT, 'src/scenes/compressed');
+const SCENARIO_DIRS = (() => {
+  if (MODE === 'full') return [path.join(ROOT, '03-story/scenarios')];
+  if (MODE === 'compressed') return [path.join(ROOT, '03-story/scenarios/compressed')];
+  // palJeongPot: finished/ 서브폴더만 컴파일 (README, 01~06 분담 시놉시스는 제외)
+  return [path.join(ROOT, '03-story/scenarios/palJeongPot/finished')];
+})();
+const OUT_DIR = (() => {
+  if (MODE === 'full') return path.join(ROOT, 'src/scenes');
+  if (MODE === 'compressed') return path.join(ROOT, 'src/scenes/compressed');
+  return path.join(ROOT, 'src/scenes/palJeongPot');
+})();
 const MANIFEST_OUT = path.join(OUT_DIR, 'compiled-manifest.json');
 
 // ─── Tokenizer 정규식 ────────────────────────────────────────────

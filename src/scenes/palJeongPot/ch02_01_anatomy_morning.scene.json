@@ -1,0 +1,135 @@
+{
+  "id": "ch02_01_anatomy_morning",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_studio_room",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_tension",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "3월 16일 아침. 자취방. 언제나 그랬듯, 나체"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "serious",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "BG",
+      "image": "bg_kmu_main",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_footsteps",
+      "volume": 0.3
+    },
+    {
+      "type": "NARRATION",
+      "text": "의대 본관 앞."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "김규민",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "윤모. 같이 가자."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어. 가자."
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "김규민",
+      "transition": "fade"
+    },
+    {
+      "type": "BG",
+      "image": "bg_anatomy_lab",
+      "transition": "fade"
+    },
+    {
+      "type": "NARRATION",
+      "text": "실습실 입구. 50명이 흰 가운에 마스크."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤하정",
+      "sprite": "outfit_lab_coat",
+      "position": "left",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "윤하정",
+      "text": "어. 왔어."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어. 다들 일찍 왔네."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "이태호",
+      "text": "모였죠? 오늘 만날 분들은 본인 의지로 몸을 내어주신 분들입니다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "이태호",
+      "text": "들어가서 묵념 같이 합시다. 사진, 영상, 카톡 절대 안 됩니다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "이태호",
+      "text": "자, 뭐 빨리 끝내드릴 테니까 조원들끼리 술한잔 하세요"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "이태호",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤하정",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_lab_door_open",
+      "volume": 0.4
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch02_02_cadaver_first"
+    }
+  ],
+  "meta": {
+    "chapter": 2,
+    "time": "2026-03-16 morning",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

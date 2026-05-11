@@ -1,0 +1,30 @@
+{
+  "id": "ch06_h4_02_close",
+  "commands": [
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "나서윤",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h4_03_perv_pair"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-03 lunch",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

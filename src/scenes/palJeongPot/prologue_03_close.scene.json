@@ -1,0 +1,46 @@
+{
+  "id": "prologue_03_close",
+  "commands": [
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "MONOLOGUE",
+      "speaker": "구윤모",
+      "text": "본과 1학년. 시작이다."
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_main_theme",
+      "volume": 0.6,
+      "fade": 4
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_light_off"
+    },
+    {
+      "type": "NARRATION",
+      "text": "윤모가 등을 끄고 침대로 향한다."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch01_01_ot_intro"
+    }
+  ],
+  "meta": {
+    "chapter": 0,
+    "time": "2026-02-28 evening",
+    "activeHeroines": [
+      "gyumin",
+      "gyeongmin",
+      "nathan",
+      "wook",
+      "junhyuk"
+    ]
+  }
+}

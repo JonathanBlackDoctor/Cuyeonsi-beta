@@ -1,0 +1,25 @@
+{
+  "id": "ch04_03_close",
+  "commands": [
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "한설",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch04_04_seoyoon_meet"
+    }
+  ],
+  "meta": {
+    "chapter": 4,
+    "time": "2026-04-28 night",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

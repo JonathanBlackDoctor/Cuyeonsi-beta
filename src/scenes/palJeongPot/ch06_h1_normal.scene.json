@@ -1,0 +1,87 @@
+{
+  "id": "ch06_h1_normal",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_campus_cafe"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 10일 오후. 본관 옆 카페."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "차세린",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "학생. 6일 산책로에서 호칭 권한 게 좀 빨랐던 것 같아요. 학생-선생님으로 한 학기 더. 그게 자연스러운 거리예요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네, 선생님. 잘 받았습니다. 천천히 가는 게 맞아요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "본과 1학년 마무리 잘 챙겨요. 다음 학기 견학에서 봬요."
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "차세린",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "BG",
+      "image": "black"
+    },
+    {
+      "type": "NARRATION",
+      "text": "— 끝."
+    },
+    {
+      "type": "NARRATION",
+      "text": "**차세린 노멀 엔딩 — 선후배의 거리**"
+    },
+    {
+      "type": "ENDING",
+      "endingId": "END_H1_NORMAL"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-10 afternoon",
+    "activeHeroines": [
+      "H1"
+    ]
+  }
+}

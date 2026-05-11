@@ -49,10 +49,6 @@
       "unreadFadeMs": 400
     },
     {
-      "type": "BG",
-      "image": "black"
-    },
-    {
       "type": "ENDING",
       "endingId": "END_H4_REJECT"
     }

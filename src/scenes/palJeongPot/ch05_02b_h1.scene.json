@@ -1,0 +1,52 @@
+{
+  "id": "ch05_02b_h1",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_ch5_seat",
+      "value": "h1"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "pair_left",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "차세린",
+      "sprite": "default",
+      "position": "pair_right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "선생님, 옆자리 괜찮을까요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "네, 앉아요. 시험 끝났죠?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네. 선생님은 동산병원 회식 끝나고 오신 거예요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "잠깐 들렀어요. 끝낸 거 자체가 의미예요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch05_02_close"
+    }
+  ],
+  "meta": {
+    "chapter": 5,
+    "time": "2026-05-11 evening"
+  }
+}

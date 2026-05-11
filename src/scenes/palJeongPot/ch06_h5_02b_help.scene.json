@@ -1,0 +1,58 @@
+{
+  "id": "ch06_h5_02b_help",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h5_event",
+      "value": "help"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "30분 같이 갈게. 의예과 회원들이 본과 한 명 와줘서 신난다는데."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "warm_smile",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배 그렇게까지 풀어주시는 거 의외예요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "의예과 1·2학년 입장에선 본과 보기 힘드니까."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "그럼 풍선 정리 + 사진까지 같이 해요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "사진까지면 35분 아니야?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "헉! 들켰다! 35분이요! ✨"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h5_02_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-03 afternoon",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

@@ -22,6 +22,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSettingsStore } from '@/stores/settingsStore';
+import { useGameStore } from '@/stores/gameStore';
 import { findEnding } from '@/data/endings';
 import { HEROINES } from '@/data/characters';
 import { computeEndingScore, type EndingGrade } from '@/engine/endingScore';
@@ -73,6 +74,7 @@ interface Props {
 }
 
 export function RankingModal({ open, onClose, endingId, flags }: Props) {
+  const minigameBonus = useGameStore((s) => s.minigameBonus);
   const reducedMotion = useSettingsStore((s) => s.reduceMotion);
   const heroine: HeroineId | null = findEnding(endingId)?.heroine ?? null;
   const heroineLabel = heroine ? HEROINES[heroine].shortName ?? '히로인' : null;
@@ -145,7 +147,7 @@ export function RankingModal({ open, onClose, endingId, flags }: Props) {
     setSubmitState('submitting');
     setSubmitError(null);
     try {
-      const score = computeEndingScore(flags, endingId);
+      const score = computeEndingScore(flags, endingId, minigameBonus ?? 0);
       const finalScoreInt = Math.round(score.finalScore);
       const result = await submitScore({
         nickname: trimmed,

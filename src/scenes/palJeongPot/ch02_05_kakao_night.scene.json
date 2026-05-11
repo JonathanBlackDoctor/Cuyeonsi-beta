@@ -1,0 +1,140 @@
+{
+  "id": "ch02_05_kakao_night",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_studio_room",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_katalk",
+      "volume": 0.4,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "같은 날 밤. 자취방."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "NARRATION",
+      "text": "5조 단톡방."
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "오준혁",
+          "text": "윤모 살아 있냐"
+        },
+        {
+          "sender": "구윤모",
+          "text": "ㅇㅇ 살아는 있음"
+        },
+        {
+          "sender": "오준혁",
+          "text": "(움하하하하 이모티콘)"
+        },
+        {
+          "sender": "이문규",
+          "text": "윤모 은설누나랑 사귀냐?"
+        },
+        {
+          "sender": "윤하정",
+          "text": "잘 어울리네"
+        },
+        {
+          "sender": "구윤모",
+          "text": "아잇 이문규 미친거 아니야"
+        },
+        {
+          "sender": "정욱",
+          "text": "우우 나는 헬스하는 남자"
+        },
+        {
+          "sender": "오준혁",
+          "text": "낄낄낄"
+        }
+      ]
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "NARRATION",
+      "text": "1:1 카톡방. \"윤하정\"."
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "윤하정",
+          "text": "자?"
+        },
+        {
+          "sender": "구윤모",
+          "text": "깨어 있어. 너도?"
+        },
+        {
+          "sender": "윤하정",
+          "text": "말 걸지 말랬지"
+        },
+        {
+          "sender": "구윤모",
+          "text": "어제 + 오늘 두 콤보"
+        },
+        {
+          "sender": "윤하정",
+          "text": "어제는 진짜 ...너 옆에 있어줘서 더 무서웠음"
+        },
+        {
+          "sender": "구윤모",
+          "text": "너 마저도 그러면 3회 솔로총회가 열려"
+        },
+        {
+          "sender": "윤하정",
+          "text": "(읽지 않는다)"
+        },
+        {
+          "sender": "구윤모",
+          "text": "(눈물)"
+        }
+      ]
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch02_06_close"
+    }
+  ],
+  "meta": {
+    "chapter": 2,
+    "time": "2026-03-17 night",
+    "activeHeroines": [
+      "H2",
+      "H3"
+    ]
+  }
+}

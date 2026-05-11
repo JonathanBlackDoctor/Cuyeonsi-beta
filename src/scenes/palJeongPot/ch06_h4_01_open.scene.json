@@ -1,0 +1,113 @@
+{
+  "id": "ch06_h4_01_open",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_studio_room",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 1일 저녁. 자취방."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "SFX",
+      "sound": "sfx_katalk_notify"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "나서윤",
+          "text": "안녕하세요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "츄파츕스 뽑고 연락드려요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "🥺"
+        }
+      ]
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "구윤모",
+          "text": "드디어!!!!!!!!!!1"
+        },
+        {
+          "sender": "구윤모",
+          "text": "why 구윤모? 100가지 구윤모이어야만 하는 이유."
+        },
+        {
+          "sender": "나서윤",
+          "text": "아…. 전에 소개팅 하신 분 약대에 있다고 들었어요."
+        },
+        {
+          "sender": "구윤모",
+          "text": "하하, 그런 넝~담 재밌네요."
+        },
+        {
+          "sender": "나서윤",
+          "text": "그러시구나"
+        }
+      ]
+    },
+    {
+      "type": "FLAG_INC",
+      "key": "H4",
+      "delta": 1
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "나서윤",
+          "text": "아뇨, 그 다나에서 소개팅 하셨다고."
+        },
+        {
+          "sender": "나서윤",
+          "text": "후배들한테도 딱 걸리셨다고."
+        }
+      ]
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "열심이십니다. 참.",
+          "next": "ch06_h4_01b_warm",
+          "tone": "warm_supportive"
+        },
+        {
+          "text": "부담 없어요, 시험 끝나고 메시지 받을게요",
+          "next": "ch06_h4_01b_neutral",
+          "tone": "direct_friendly"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-01 evening",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

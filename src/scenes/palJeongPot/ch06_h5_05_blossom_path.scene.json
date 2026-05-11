@@ -1,0 +1,73 @@
+{
+  "id": "ch06_h5_05_blossom_path",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_campus_night_blossom",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.5,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 7일 저녁. 캠퍼스 벚꽃길."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "warm_smile",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배. 한 학기 동안 선배 호칭. 처음부터 \"선배~!\"였잖아요. 한 학기 지나서 진심 한 줄씩 풀어 가는 사이가 됐는데, 호칭은 그대로네요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배 호칭, 그만할까 싶어서요. 한 마디 조언 좀 해주세요!ㅎㅎ"
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "선배 그만하고 '윤모'라고 불러도 돼",
+          "next": "ch06_h5_05b_call",
+          "tone": "bright_forward",
+          "isKey": true,
+          "descriptor": "ch6_h5_call_yunyoung"
+        },
+        {
+          "text": "윤영, 호칭은 너 편한 대로.",
+          "next": "ch06_h5_05b_call_partial",
+          "tone": "warm_supportive"
+        },
+        {
+          "text": "선배면 선배라 해야지.",
+          "next": "ch06_h5_05b_keep",
+          "tone": "mature_serious"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-07 evening",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

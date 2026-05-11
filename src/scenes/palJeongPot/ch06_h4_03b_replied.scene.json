@@ -1,0 +1,46 @@
+{
+  "id": "ch06_h4_03b_replied",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h4_perv_kakao",
+      "value": "on_time"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "구윤모",
+          "text": "약대 가운 처음 봤어요. 어른스러운 분위기가 짙어지시네요"
+        },
+        {
+          "sender": "구윤모",
+          "text": "시험 잘 보세요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "어른스러운 분위기라는 거 신기하게 들으시네요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "다음 주 끝나고 시간 잡아둘게요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "🫶"
+        }
+      ]
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h4_03_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-04 evening",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

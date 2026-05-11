@@ -31,6 +31,7 @@ import { EndingStatsPanelAnimated } from '@/ui/affection/EndingStatsPanelAnimate
 import { EndingStatsPanelDefault } from '@/ui/affection/EndingStatsPanelDefault';
 import { AffectionThermometer } from '@/ui/affection/AffectionThermometer';
 import { computeEndingScore } from '@/engine/endingScore';
+import { MiniGameGate } from '@/minigame/MiniGameGate';
 import { isRankingEnabled } from '@/engine/ranking';
 import { RankingModal } from '@/ui/RankingModal';
 import type { AffinityTargetId, GameFlags, HeroineId } from '@/engine/types';
@@ -62,7 +63,13 @@ const NPC_THERM_VIEW_H = 280;
 export function EndingScreen() {
   const endingId = useGameStore((s) => s.pendingEnding);
   const flags = useGameStore((s) => s.flags);
+  const minigameBonus = useGameStore((s) => s.minigameBonus);
+  const storyMode = useSettingsStore((s) => s.storyMode);
   const setSetting = useSettingsStore((s) => s.set);
+  // 팔정팟 각색본 한정 — 미니게임 1회 강제. 결과를 받기 전엔 엔딩 점수 계산을 보류.
+  const [minigameDone, setMinigameDone] = useState(
+    storyMode !== 'palJeongPot' || minigameBonus !== null,
+  );
   // 이스터에그 토글 — PauseMenu(ESC)의 "호감도" 라벨 클릭으로 ON/OFF.
   // OFF(기본)=새 시퀀스 애니메이션, ON=액체 애니메이션(이스터에그).
   const easterEgg = useSettingsStore((s) => s.animatedEndingPanel);
@@ -103,10 +110,11 @@ export function EndingScreen() {
   // unlocked_endings에도 push(중복 X). 갤러리·기록 화면이 바로 반영.
   useEffect(() => {
     if (!endingId) return;
+    if (!minigameDone) return;
     if (recordedEndingRef.current === endingId) return;
     recordedEndingRef.current = endingId;
     try {
-      const score = computeEndingScore(flags, endingId);
+      const score = computeEndingScore(flags, endingId, minigameBonus ?? 0);
       recordEnding({
         endingId,
         grade: score.grade,
@@ -118,12 +126,12 @@ export function EndingScreen() {
       // eslint-disable-next-line no-console
       console.warn('[EndingScreen] recordEnding 실패:', e);
     }
-  }, [endingId, flags, recordEnding]);
+  }, [endingId, flags, recordEnding, minigameDone, minigameBonus]);
 
   const handleShare = async () => {
     if (!endingId) return;
     try {
-      const score = computeEndingScore(flags, endingId);
+      const score = computeEndingScore(flags, endingId, minigameBonus ?? 0);
       const result = await shareEndingResult({
         endingId,
         grade: score.grade,
@@ -150,7 +158,7 @@ export function EndingScreen() {
     if (!endingId) return;
     setShareToast('이미지 생성 중...');
     try {
-      const score = computeEndingScore(flags, endingId);
+      const score = computeEndingScore(flags, endingId, minigameBonus ?? 0);
       const result = await downloadEndingImage({
         endingId,
         grade: score.grade,
@@ -167,6 +175,12 @@ export function EndingScreen() {
   };
 
   if (!endingId) return null;
+
+  // 팔정팟 각색본 한정 — 엔딩 점수 표시 직전 미니게임 보너스 라운드.
+  // 보너스 결정 전엔 본 화면(점수/통계) 마운트 보류.
+  if (!minigameDone) {
+    return <MiniGameGate onDone={() => setMinigameDone(true)} />;
+  }
 
   // 거절 엔딩은 RejectEnding이 8단계 시퀀스 자체 처리 (옵션 A)
   if (endingId === REJECT_ENDING_ID && !rejectComplete) {

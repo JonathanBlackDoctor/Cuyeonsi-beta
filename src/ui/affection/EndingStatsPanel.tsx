@@ -30,6 +30,7 @@ import type { EndingCategory } from '@/data/endings';
 import { HEROINES } from '@/data/characters';
 import { AffectionThermometer } from './AffectionThermometer';
 import { computeEndingScore, type EndingGrade } from '@/engine/endingScore';
+import { useGameStore } from '@/stores/gameStore';
 
 // computeEndingScore + EndingScore + EndingScoreBreakdown은 @/engine/endingScore SSoT
 // (시뮬 스크립트와 공유). 본 파일은 표시 책임만.
@@ -62,7 +63,8 @@ const SCALE_HEROINE = 0.78;
 const THERM_DISPLAY_H = 460;
 
 export function EndingStatsPanel({ flags, endingId }: { flags: GameFlags; endingId: EndingId }) {
-  const score = computeEndingScore(flags, endingId);
+  const minigameBonus = useGameStore((s) => s.minigameBonus);
+  const score = computeEndingScore(flags, endingId, minigameBonus ?? 0);
   const winner = score.breakdown.winner;
   const gradeColor = GRADE_COLOR[score.grade];
   const hidden = score.hiddenBonusLabels.length > 0;

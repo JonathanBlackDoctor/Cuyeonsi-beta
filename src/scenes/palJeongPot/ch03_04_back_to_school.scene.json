@@ -1,0 +1,187 @@
+{
+  "id": "ch03_04_back_to_school",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_kmu_main",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "견학 마치고 학교 복귀. 동아리 신입 모집 부스."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "김규민",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "표경민",
+      "sprite": "default",
+      "position": "left_back",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "조나단",
+      "sprite": "laugh",
+      "position": "center_back",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "윤모 견학에서 어디 갔다 왔냐."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "길 잃었다. 의국까지 들어갔다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "표경민",
+      "text": "그래서 누구 만났냐."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "차세린 선생. 내과 전공의 2년차."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "명함 받았냐."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어, 의국 직통."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "표경민",
+      "text": "사고 나면 연락하라고 주신 거지, 따로 연락하라고 주신 게 아니야."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "메니스 후배",
+      "text": "윤모 형! 잠깐만요! 신입 다섯 명 등록받았어요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "잘했어. 저녁에 들를게."
+    },
+    {
+      "type": "VIDEO",
+      "src": "video_meet_yuna"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "김규민",
+      "sprite": "default",
+      "position": "left_back",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "smile_big",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배~~! 잠깐만요!"
+    },
+    {
+      "type": "NARRATION",
+      "text": "긴 갈색 머리에 환한 미소. 의예과 2학년 장윤영."
+    },
+    {
+      "type": "CG",
+      "image": "cg_yuna_booth",
+      "cgId": "cg_yuna_booth"
+    },
+    {
+      "type": "NARRATION",
+      "text": "부스 앞. 장윤영이 환하게 웃으며 전단지를 든 채 다가온다."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "본과 선배님들이시죠? 저 의예과 2학년 장윤영이라고 해요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "조나단",
+      "text": "본과는 신입 모집 대상 아닌 거 모르나 봐."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "알아요! 그냥 인사드리고 싶어서요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배님, 카톡 해도 될까요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "와."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "표경민",
+      "text": "직진."
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "활기차네, 너",
+          "next": "ch03_04b_honest",
+          "tone": "bright_forward",
+          "isKey": true,
+          "descriptor": "ch3_first_intro"
+        },
+        {
+          "text": "어, 그럼",
+          "next": "ch03_04b_neutral",
+          "tone": "direct_friendly"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 3,
+    "time": "2026-04-06 afternoon",
+    "activeHeroines": [
+      "H1",
+      "H5"
+    ]
+  }
+}

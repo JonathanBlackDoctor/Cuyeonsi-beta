@@ -1,0 +1,105 @@
+{
+  "id": "ch04_03_lab_late",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_biochem_lab_night",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "4월 28일 밤 11시. 생화학 실험실."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "outfit_lab_late",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "CG",
+      "image": "cg_seol_late_night",
+      "cgId": "cg_seol_late_night"
+    },
+    {
+      "type": "NARRATION",
+      "text": "한설이 안경 벗고 눈 감고 있다. 가운 단추 하나 풀림. 무방비 표정."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "NARRATION",
+      "text": "윤모가 노크. 한설이 안경 끼고 자세 잡는다."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "outfit_lab_late",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "들어와요. 시험 자료 빌리러 온 거예요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네. 도서관 자료실에선 안 빌려준다고 해서요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "여러 부 복사해놨어요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "감사합니다."
+    },
+    {
+      "type": "NARRATION",
+      "text": "책상 위 식어버린 컵라면."
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "선생님, 식사하셨어요?",
+          "next": "ch04_03b_meal",
+          "tone": "warm_supportive",
+          "isKey": true,
+          "descriptor": "ch4_meal"
+        },
+        {
+          "text": "조용히 자료만 챙기고 갈게요",
+          "next": "ch04_03b_quiet",
+          "tone": "direct_friendly"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 4,
+    "time": "2026-04-28 night",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

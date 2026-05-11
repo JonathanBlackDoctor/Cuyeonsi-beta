@@ -1,0 +1,31 @@
+{
+  "id": "ch06_h3_02b_polite",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h3_admire",
+      "value": "polite"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "선생님은 늘 멋지세요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "정중하게 받아주시네요. 어색함이 살짝 풀리네요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h3_02_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-02 evening",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

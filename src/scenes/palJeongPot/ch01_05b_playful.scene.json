@@ -1,0 +1,34 @@
+{
+  "id": "ch01_05b_playful",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_friend_joke",
+      "value": "playful"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "야 첫날부터 뭔 소리야. 너부터 챙겨라."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "조나단",
+      "text": "카운터 펀치."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch01_05_close"
+    }
+  ],
+  "meta": {
+    "chapter": 1,
+    "time": "2026-03-03 afternoon",
+    "activeHeroines": [
+      "gyumin",
+      "gyeongmin",
+      "nathan",
+      "junhyuk"
+    ]
+  }
+}

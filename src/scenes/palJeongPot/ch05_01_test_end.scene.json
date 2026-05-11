@@ -1,0 +1,130 @@
+{
+  "id": "ch05_01_test_end",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_lecture_day",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "5월 11일 오후. 첫 시험 마지막 과목 끝."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "김규민",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "표경민",
+      "sprite": "default",
+      "position": "left_back",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "아오 야마를 어떻게단한명도 안태우냐 이게 말이되나진짜 감염 ㄹㅇ 레전드시험이네 ㅋㅋ"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "와 진짜 엄지형 믿었는데 이게 맞냐?"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "조나단",
+      "sprite": "laugh",
+      "position": "center_back",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "조나단",
+      "text": "지금 다른 애들 있는 단톡에서 첫 시험 끝난 김에 한 잔 하자던데?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "김규민",
+      "text": "ㅇㅇ 7시에 동성로에서 본다더라. 약대쪽이랑 같이 보자던데? 장윤영도 온대"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "조나단",
+          "text": "7시 동성로 ㄱㄱ"
+        },
+        {
+          "sender": "김규민",
+          "text": "예아 조치"
+        },
+        {
+          "sender": "김규민",
+          "text": "예과애들 없나? 걔네 담주 셤이잖음 ㅋㅋ 불러서 데꼬가자"
+        },
+        {
+          "sender": "윤하정",
+          "text": "다 모이게?"
+        },
+        {
+          "sender": "구윤모",
+          "text": "ㅇㅇ 자취방 들렀다 ㄱ"
+        }
+      ]
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "김규민",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "표경민",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "조나단",
+      "transition": "fade"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch05_02_pub_first"
+    }
+  ],
+  "meta": {
+    "chapter": 5,
+    "time": "2026-05-11 afternoon",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

@@ -16,10 +16,54 @@
 
 ## 이력
 
+### 2026-05-12 — startScene mutex nested JUMP silent drop 회귀 처방 (팔정팟 플레이 stuck 버그)
+
+- **증상**: 팔정팟 각색본 플레이 중 선택지 선택 후 다음 씬으로 안 넘어가고 멈춤. 콘솔 경고 `[advance] step null at scene "ch04_01_close" — re-seeking to 0 for safety` 반복.
+- **재현 시나리오**: `ch04_01_close` 같은 "텍스트 명령 없는 짧은 씬"(`CHARACTER_HIDE×N → BGM_STOP → JUMP`) 진입. 동일 패턴: `ch04_03_close`, `ch04_05_close`, `ch05_03_close`, `ch05_07_close` 등.
+- **원인**: `gameStore.ts:49`의 `_startSceneInFlight` mutex가 nested startScene 호출을 **silent drop**(`return`)했음.
+  - 팔정팟은 풀/압축 대비 NARRATION/MONOLOGUE/DIALOGUE를 더 적극적으로 삭감 → "텍스트 없는 짧은 씬"이 흔해짐.
+  - `SceneRenderer`의 시각-명령(CHARACTER_HIDE/BG/CHARACTER/CG_HIDE/BGM/BGM_STOP/SFX)에 대한 `void advance()` auto-advance 체인이 사용자 클릭 없이 즉시 JUMP까지 도달.
+  - 외부 `startScene`이 챕터 fade-out/loadScene/inner advance 중(=mutex held)일 때 이 JUMP의 nested `await startScene(next)`가 mutex check에서 `return` → interpreter 인덱스 past-end → 다음 advance에서 step null → safety reseek(0) → 무한 loop.
+  - 풀/압축에서는 짧은 씬이 거의 없어 잠재 결함이 노출되지 않았던 회귀.
+- **수정**: `src/stores/gameStore.ts` — mutex bail 대신 **last-write-wins 큐**.
+  - 신규 모듈-스코프 변수 `_queuedStartSceneId: string | null`.
+  - `startScene` 진입부: `if (_startSceneInFlight) { _queuedStartSceneId = sceneId; return; }`.
+  - `startScene` finally 블록: mutex 해제 후 큐가 비어있지 않고 현재 씬과 다르면 `void get().startScene(queued)` chain.
+  - 같은 sceneId가 큐되면(safety reseek 등 자기 자신) chain skip — 무한 재호출 회피.
+- **검증**:
+  - `?scene=ch04_01_close` 직접 진입 → 4 cmd auto-advance 완료 후 `ch04_02_cafe_late` NARRATION 대기로 정상 전환 (이전엔 무한 step-null).
+  - `?scene=ch04_01_library_late` → 선택지 0 픽 → `ch04_01b_share` KAKAO idx 2 도달 (선택지→씬 전환 정상).
+  - `_queuedStartSceneId === currentSceneId` 가드로 safety reseek 재호출 회피 확인.
+- **풀/압축 회귀 위험**: 없음. 풀/압축은 짧은 씬이 거의 없어 nested startScene 경로 자체가 트리거되지 않으므로 mutex 동작이 사실상 변경 전과 동일. 변경된 경로는 "이전엔 silent drop되던 nested 호출"이 이제 큐로 처리되는 신규 경로뿐.
+- **모듈** (status 변동): `src/stores/gameStore.ts` review.
+- **사유**: 사용자 PM 풀플레이 (2026-05-12) — 팔정팟 모드 진입 후 선택지 진행 막힘 신고.
+- **승인**: PM 구두 (2026-05-12, 즉시 처방).
+
+### 2026-05-11 — 팔정팟 각색본 통합 (212 씬 컴파일 + 모드 신설)
+
+- **변경**: 친구 6명이 분담 각색한 시나리오 12개 .md(212 씬, 4,742줄)를 풀/압축과 분기 그래프 1:1 동일하게 유지하면서 `palJeongPot` 모드로 게임에 통합.
+  - **`scripts/compile-scene.ts`** — `CompileMode` 유니언에 `'palJeongPot'` 추가, `SCENARIO_DIRS`/`OUT_DIR` 분기 추가. `03-story/scenarios/palJeongPot/finished/*.md` → `src/scenes/palJeongPot/*.scene.json`.
+  - **`package.json`** — `compile:palJeongPot` 신규 스크립트 + `compile:all`에 체이닝(`compile && compile:compressed && compile:palJeongPot`).
+  - **블로커 3건 보강** (`-` 접두사 누락 = CHOICE 옵션 dropping이었음):
+    - `ch06_h2_hajeong.md:305` — H2 옥상 honest 선택지 옵션화. `next: ch06_h2_04b_honest`, `{tone:direct_friendly, key:true, descriptor:ch6_h2_rooftop_honest}` (압축본 메타 1:1 차용). **본문 "입술을 탐하고 싶다" 12세 등급 가드 충돌 소지 — PM 그대로 사용 결정**.
+    - `ch06_h3_seol.md:140` — H3 산책로 admire 선택지 옵션화. `next: ch06_h3_02b_admire`, `{tone:warm_supportive, key:true, descriptor:ch6_h3_no_glasses_admire}` (압축본 메타 1:1 차용).
+    - `ch06_h4_seoyoon.md:56` — H4 open warm 선택지 옵션화. `next: ch06_h4_01b_warm`, `{tone:warm_supportive}` (압축본 메타 1:1 차용).
+  - **REJECT 위임 표기 복원** (`ch06_h4_seoyoon.md` `ch06_h4_reject` 씬) — `[지문] (RejectEnding 컴포넌트가 8단계 시퀀스를 자체 처리...)` 위임 표기를 제거하고, 압축본의 `[BG: black] / [BGM: 슬픔] / [SFX: 카톡_알림] / [KAKAO mode=dm heroine=H4 unreadFadeMs=400]` 4메시지 블록 + `[BG: black fade=3] / [VIDEO: video_reject_seoyoon skipable=false] / [ENDING: END_H4_REJECT]` 통째 복원. **사유: RejectEnding 컴포넌트는 fade/title/video/toast 4단계 후처리만 담당. 4메시지 카톡은 씬 안 [KAKAO] 블록이 처리 — 위임만 두면 카톡 텍스트가 안 보임.**
+- **검증**:
+  - `npm run compile:palJeongPot` 통과 → 212 씬 + `compiled-manifest.json` 생성.
+  - `unknownDirectives` 1건 `[VIDEO]` — `RE_VIDEO` regex가 `skipable=false` 인자 미지원이라 reject 씬에서 1줄 drop. **압축본도 동일 — RejectEnding 컴포넌트가 영상 재생을 자체 처리하므로 회귀 아님**.
+  - `IF v0.1 미지원` 경고 6건(`ch05_02b_h2`, `ch06_h{1,2,3,4,5}_*evaluate`) — 압축본과 동일 패턴, 엔진 런타임 IF 평가가 처리.
+  - 패치된 3 씬 CHOICE 개수 풀/압축과 일치: `ch06_h2_04_rooftop`=3, `ch06_h3_02_walk`=3, `ch06_h4_01_open`=2.
+  - REJECT 씬 KAKAO 메시지(4건) 압축본과 `JSON.stringify` 비트-동일.
+  - preview MCP에서 `storyMode='palJeongPot'` + `?scene=prologue_01_home` 진입 시 본문 결이 압축본 대비 짧고 다름 (팔정팟 톤 적용 확인). `gameStore.currentSceneId` 정상 동기화.
+- **모듈** (status 변동): `scripts/compile-scene.ts` review · `package.json` review · `03-story/scenarios/palJeongPot/finished/ch06_h2_hajeong.md`·`ch06_h3_seol.md`·`ch06_h4_seoyoon.md` review · `src/scenes/palJeongPot/*.scene.json` × 212 (자동 생성).
+- **사유**: PM 요청 (2026-05-11) — 친구 6명 분담 각색본 최종 대본을 게임에 실제로 플레이 가능한 형태로 통합. 풀/압축과 분기 그래프 동일 + 대사/지문/선지만 다름.
+- **승인**: PM 구두 (2026-05-11, AskUserQuestion 2건 결정).
+
 ### 2026-05-11 — H4 거절 분기: Ch.5 챕터 종료 회상 스킵 + VEO 재생 중 BGM 연속 유지
 
 - **변경 1 — Ch.5 챕터 종료 회상 스킵**: `ch05_07_close` 씬 시작부에 `[IF: late_reply_count >= 2] [JUMP: ch06_h4_reject] [/IF]` 추가. 두 미니게임 모두 타임아웃(late_reply_count=2) 시 다섯 명 회상 모놀로그를 건너뛰고 바로 거절 카톡 씬으로 진입.
-- **변경 2 — 거절 씬 VEO 추가 + BGM 엔딩 끝까지 연속 재생**: `ch06_h4_reject` 씬에서 `[/KAKAO]` 직후 `[BG: black fade=3]` → `[VIDEO: video_reject_seoyoon skipable=false]` → `[ENDING: END_H4_REJECT]` 순으로 추가. `[BGM_STOP]` 없음 — sad BGM이 VEO + 엔딩 크레딧 + 타이틀 복귀 직전까지 끊기지 않고 흐르며, BGM 정리는 엔진 타이틀 전환 시 자동 처리.
+- **변경 2 — 거절 엔딩 BGM 연속 재생 (실제 버그 픽스)**: `src/ui/katalk/RejectEnding.tsx` video 단계에서 `audioManager.stopBgm({ fade: 4 })` 호출 제거 + `audioManager` import 제거. `audioManager.stopBgm`은 `audioManager.ts:160-161` 무음 방지 폴백을 통해 자동으로 `bgm_daily`(일상)를 재생시키는 부작용이 있어, 거절 8단계에서 bgm_sad가 잠깐 나오다가 bgm_daily로 바뀌는 회귀가 발생했음. 호출 제거로 bgm_sad가 영상·크레딧·해금 토스트 전 구간 연속 재생되고, 타이틀 복귀는 엔진이 자체 처리. 씬 스크립트(`ch06_h4_reject`)는 원형 유지 — `[BGM: 슬픔]` + KAKAO + `[ENDING:]`만, RejectEnding 컴포넌트가 5~8단계(페이드/타이틀카드/영상/토스트) 시각화를 책임.
 - **모듈**: `03-story/scenarios/ch05_decision.md`, `03-story/scenarios/compressed/ch05_decision.md`, `03-story/scenarios/ch06_h4_seoyoon.md`, `03-story/scenarios/compressed/ch06_h4_seoyoon.md`. 작가 메모 §8단계 표(ch06 풀버전) 스펙 갱신. 자동 생성물 `src/scenes/`은 `npm run compile:all`로 재컴파일 필요.
 - **사유**: PM 직접 지시 — "미니게임 실패 시 챕터 종료 회상 없이 바로 거절 카톡", "VEO + sad BGM 끊기지 않고 끝까지 재생".
 - **승인**: PM 직접 지시 (2026-05-11).

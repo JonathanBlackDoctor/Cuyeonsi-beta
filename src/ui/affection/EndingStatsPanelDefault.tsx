@@ -30,6 +30,7 @@ import { HEROINE_IDS } from '@/engine/types';
 import type { EndingCategory } from '@/data/endings';
 import { HEROINES } from '@/data/characters';
 import { useSettingsStore } from '@/stores/settingsStore';
+import { useGameStore } from '@/stores/gameStore';
 import { AffectionThermometer } from './AffectionThermometer';
 import { computeEndingScore, type EndingGrade } from '@/engine/endingScore';
 import { useEndingCountUp } from './useEndingCountUp';
@@ -67,7 +68,11 @@ export function EndingStatsPanelDefault({
   flags: GameFlags;
   endingId: EndingId;
 }) {
-  const score = useMemo(() => computeEndingScore(flags, endingId), [flags, endingId]);
+  const minigameBonus = useGameStore((s) => s.minigameBonus);
+  const score = useMemo(
+    () => computeEndingScore(flags, endingId, minigameBonus ?? 0),
+    [flags, endingId, minigameBonus],
+  );
   const bd = score.breakdown;
   const winner = bd.winner;
   const gradeColor = GRADE_COLOR[score.grade];

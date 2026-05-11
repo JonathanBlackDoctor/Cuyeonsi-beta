@@ -1,0 +1,38 @@
+{
+  "id": "ch06_h4_04b_distance",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h4_date",
+      "value": "distance"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "시험 끝난 다음 날인데 무리 안 하실 자리로 잡았어요. 그 속도 안 흔드는 게 같이 가는 거지 싶었어요."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "나서윤",
+      "sprite": "smile_slight",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "나서윤",
+      "text": "그 마음 받을게요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h4_04_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-13 saturday afternoon",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

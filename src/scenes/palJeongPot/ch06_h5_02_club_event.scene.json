@@ -1,0 +1,71 @@
+{
+  "id": "ch06_h5_02_club_event",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_kmu_main",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 3일 오후. 축제 셋째 날. 의예과 동아리 행사."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "outfit_festival",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "[장윤영] 선배~~! 정말 와주셨네요 고마워요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "응원 막대 받았으니까 한 번 와보는 게 맞지."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "풍선 정리 도와주실 수 있어요? 30분만요!"
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "내가 계명의 정리왕이야 어디로 갈까",
+          "next": "ch06_h5_02b_help",
+          "tone": "bright_forward"
+        },
+        {
+          "text": "어, 30분만이면...뭐 그래 도와줄 수 있지",
+          "next": "ch06_h5_02b_help_quick",
+          "tone": "direct_friendly"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-03 afternoon",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

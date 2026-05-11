@@ -1,0 +1,104 @@
+{
+  "id": "ch06_h1_happy",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_dongsan_hallway"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.5,
+      "fade": 3
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 27일 저녁. 동산병원 의국 휴게실."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "smile",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "차세린",
+      "sprite": "tired",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "CG",
+      "image": "cg_serin_first_meet",
+      "cgId": "cg_serin_first_meet"
+    },
+    {
+      "type": "NARRATION",
+      "text": "의국 휴게실. 차세린. 흰 가운에 청록 스크럽. 옅은 미소."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "윤모 학생."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "누나, 당직 수고하셨어요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "누나-동생 사이까지는 시간이 필요한 것 같아요. 다음 단계는 정리할 시간이 필요해요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "네. 천천히 가는 게 맞아요. 다음 학기에 의국 한 번씩 들러도 돼요?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "...다음에도 와줄래요? 자연스러워지면 그때 다음 단계 가요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "차세린",
+      "text": "...한 학기 잘 와줬어요."
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_romantic",
+      "volume": 0.6,
+      "fade": 2
+    },
+    {
+      "type": "BG",
+      "image": "black"
+    },
+    {
+      "type": "NARRATION",
+      "text": "— 끝."
+    },
+    {
+      "type": "NARRATION",
+      "text": "**차세린 해피 엔딩 — 내과 의국의 늦봄**"
+    },
+    {
+      "type": "ENDING",
+      "endingId": "END_H1_HAPPY"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-27 evening",
+    "activeHeroines": [
+      "H1"
+    ]
+  }
+}

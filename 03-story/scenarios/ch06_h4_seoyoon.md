@@ -960,8 +960,6 @@ status: review
 - {speaker:나서윤, preTyping1:800, prePause:1000, preTyping2:3000} 좋은 인연 만나길 바랄게 🥺🥺
 [/KAKAO]
 
-[BG: black fade=3]
-[VIDEO: video_reject_seoyoon skipable=false]
 [ENDING: END_H4_REJECT]
 
 ---
@@ -1093,7 +1091,7 @@ route-H4 §END_H4_REJECT + H4 §6 + MASTER-PLAN §4.3 인용 정확:
 | 4단계 — 마지막 🥺🥺 후 2초 정지 | `[SCENE_CUE: 4단계]` + `[CG: cg_seoyoon_reject show]` (BGM만 잔잔히 2초 정적) | 카톡 화면 풀스크린 정적 2초 | ✓ |
 | 5단계 — 페이드 아웃 (검은색) | `[SCENE_CUE: 5단계]` + `[CG_HIDE]` + `[BG: black fade=4]` | 검은 색으로 천천히 페이드 아웃 | ✓ |
 | 6단계 — 타이틀 카드 "BAD ENDING — 답장이 늦어서" | `[SCENE_CUE: 6단계]` + `[지문] **BAD ENDING — 답장이 늦어서**` | 검은 배경 + 흰 글자 | ✓ |
-| 7단계 — 영상 video_reject_seoyoon 재생 (5~7초) | `[SCENE_CUE: 7단계]` + `[BG: black fade=3]` + `[VIDEO: video_reject_seoyoon skipable=false]` | 비 내리는 창문 + 카톡 화면 비춤, BGM은 영상 내내 + 엔딩 크레딧 + 타이틀 복귀 직전까지 끊기지 않고 유지 (BGM_STOP 없음 — 엔진 타이틀 전환 시 자동 처리) | ✓ |
+| 7단계 — 영상 video_reject_seoyoon 재생 (5~7초) | `RejectEnding` 컴포넌트가 렌더링 (씬 스크립트엔 VIDEO 디렉티브 없음). BGM 정지 호출 없음 — bgm_sad는 영상·크레딧·타이틀 복귀 직전까지 끊기지 않고 유지. `audioManager.stopBgm`은 bgm_daily 자동 폴백을 깨우므로 절대 호출 금지. | 비 내리는 창문 + 카톡 화면 비춤 + bgm_sad 연속 재생 | ✓ |
 | 8단계 — 엔딩 크레딧 + 해금 토스트 | `[SCENE_CUE: 8단계]` + `[지문] 엔딩 리스트에 해금되었습니다 — END_H4_REJECT` + `[ENDING: END_H4_REJECT]` | 엔딩 크레딧 표시 + 해금 토스트 | ✓ |
 
 > route-H4 §END_H4_REJECT의 원본 8단계(페이드 인 / BGM 전환 / 카톡 알림 SFX / 타이핑 인디케이터 / 메시지 타이핑 / 2초 정지 / 페이드 아웃 / 타이틀 카드)는 SFX·타이핑 인디케이터를 별도 단계로 분리한 더 세분화된 매핑. 본 시나리오는 H4 §6 8단계(MASTER-PLAN §4.3 / H4 §6 / H4 §6 8단계 연출 명세 정확 일치)로 매핑하여 SFX·타이핑 인디케이터를 3단계 한 줄씩 타이핑 안 디테일로 흡수. 영상 재생(7단계) + 엔딩 크레딧/해금 토스트(8단계)도 H4 §6에 정식 등록된 단계라 본 매핑이 정합.

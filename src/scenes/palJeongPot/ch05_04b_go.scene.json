@@ -1,0 +1,34 @@
+{
+  "id": "ch05_04b_go",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_mt",
+      "value": "go"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "구윤모",
+          "text": "ㄱ"
+        },
+        {
+          "sender": "김규민",
+          "text": "승보 형 + 서윤 누나 합류. 윤영도 ㄱ. 한설 선생님 잠깐. 차세린 선생님 미정"
+        }
+      ]
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch05_05_mt_pension"
+    }
+  ],
+  "meta": {
+    "chapter": 5,
+    "time": "2026-05-13 evening",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

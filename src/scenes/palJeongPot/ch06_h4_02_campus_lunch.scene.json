@@ -1,0 +1,50 @@
+{
+  "id": "ch06_h4_02_campus_lunch",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_kmu_main",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "6월 3일 점심. 다나 앞."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "나서윤",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "나서윤",
+      "text": "베이크드 리조또가 맛있다죠?"
+    },
+    {
+      "type": "CHOICE",
+      "choices": []
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-03 lunch",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "ch06_h5_06_evaluate",
+  "commands": [
+    {
+      "type": "EVALUATE_TIER",
+      "winner": "H5"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "branch evaluation",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

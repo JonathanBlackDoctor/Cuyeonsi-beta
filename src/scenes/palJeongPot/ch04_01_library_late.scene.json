@@ -1,0 +1,92 @@
+{
+  "id": "ch04_01_library_late",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_library_night",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.4,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "4월 27일 밤 11시. 의대 도서관 자습실. 시험 일주일 전."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "표경민",
+      "sprite": "default",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "표경민",
+      "text": "윤모. 해부학 어디까지 왔어?"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "당연히 하나도 안했지 나 출국의 신 구윤모야"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤하정",
+      "sprite": "sleeping",
+      "position": "left",
+      "transition": "fade"
+    },
+    {
+      "type": "CG",
+      "image": "cg_hajeong_library",
+      "cgId": "cg_hajeong_library"
+    },
+    {
+      "type": "NARRATION",
+      "text": "윤하정이 해부학 교과서 위에 팔 베고 잠들어 있다. 빈 커피 컵 두 개."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "표경민",
+      "text": "너 22학번 선배한테 받은 해부 족보 있지? 윤하정이 부산 출신이라 선배 라인이 약하다고 했어. 과대니까 챙기는 게 자연스럽지 않냐."
+    },
+    {
+      "type": "CHOICE",
+      "choices": [
+        {
+          "text": "지금 5조 단톡에 올린다",
+          "next": "ch04_01b_share",
+          "tone": "direct_friendly",
+          "isKey": true,
+          "descriptor": "ch4_share"
+        },
+        {
+          "text": "내일 깨면 직접 준다",
+          "next": "ch04_01b_later",
+          "tone": "mature_serious"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "chapter": 4,
+    "time": "2026-04-27 night",
+    "activeHeroines": [
+      "H2"
+    ]
+  }
+}

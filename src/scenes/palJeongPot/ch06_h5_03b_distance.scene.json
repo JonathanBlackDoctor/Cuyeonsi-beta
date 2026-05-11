@@ -1,0 +1,63 @@
+{
+  "id": "ch06_h5_03b_distance",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h5_morning",
+      "value": "distance"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "거리감 챙겨주는 마음 잘 받을게."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "blush",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "사실 단톡 자랑 안 한 것도 그 마음의 일부예요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "그 마음이 한 학기 동안 깊어진 거지."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배. 6월 마지막 주에 인천 본가 갔다 와요. 의예과 2학기 전에요."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "인천 본가 잘 챙기고 와."
+    },
+    {
+      "type": "FLAG_INC",
+      "key": "H5",
+      "delta": 5
+    },
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h5_incheon",
+      "value": "mentioned"
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h5_03_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-05 morning",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}

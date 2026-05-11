@@ -1,0 +1,38 @@
+{
+  "id": "ch06_h3_02b_admire",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h3_admire",
+      "value": "warm"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "와... 진짜 다른 사람 같으세요. 사복에 안경 없는 모습이 한층 부드러우세요."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "한설",
+      "sprite": "blush",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "한설",
+      "text": "그렇게 정색하고 그런 말 꺼내는 거 의외예요. 사복이 어색했는데 좀 풀리네요."
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch06_h3_02_close"
+    }
+  ],
+  "meta": {
+    "chapter": 6,
+    "time": "2026-06-02 evening",
+    "activeHeroines": [
+      "H3"
+    ]
+  }
+}

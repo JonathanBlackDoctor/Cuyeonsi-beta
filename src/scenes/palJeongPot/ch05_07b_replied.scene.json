@@ -1,0 +1,38 @@
+{
+  "id": "ch05_07b_replied",
+  "commands": [
+    {
+      "type": "FLAG_SET",
+      "key": "flag_h4_dawn_reply",
+      "value": "on_time"
+    },
+    {
+      "type": "KAKAO",
+      "messages": [
+        {
+          "sender": "구윤모",
+          "text": "안 잤어요. 정리하시는 모습이 자연스러워서 같이 했어요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "그래도요. MT 분위기 처음이라. 와본 거 다행이에요"
+        },
+        {
+          "sender": "나서윤",
+          "text": "잘 자요 🥺"
+        }
+      ]
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch05_07_close"
+    }
+  ],
+  "meta": {
+    "chapter": 5,
+    "time": "2026-05-17 dawn",
+    "activeHeroines": [
+      "H4"
+    ]
+  }
+}

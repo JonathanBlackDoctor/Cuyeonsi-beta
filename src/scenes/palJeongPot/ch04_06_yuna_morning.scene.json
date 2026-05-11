@@ -1,0 +1,121 @@
+{
+  "id": "ch04_06_yuna_morning",
+  "commands": [
+    {
+      "type": "BG",
+      "image": "bg_kmu_main",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM",
+      "track": "bgm_daily",
+      "volume": 0.5,
+      "fade": 2
+    },
+    {
+      "type": "NARRATION",
+      "text": "4월 30일 오전 9시. 도서관 앞 광장."
+    },
+    {
+      "type": "CHARACTER",
+      "id": "윤모",
+      "sprite": "default",
+      "position": "center",
+      "transition": "fade"
+    },
+    {
+      "type": "CHARACTER",
+      "id": "장윤영",
+      "sprite": "smile_big",
+      "position": "right",
+      "transition": "fade"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배~~!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어, 또 마주쳤네."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "마주친 게 아니라 시간 맞춰서요! 응원 한 번 하고 가려고요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "응원이라."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "화이팅! 라고 외쳐드리는 거예요!"
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "구윤모",
+      "text": "어, 고마워. 잘 봐야겠다."
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "헉 받아주셨어요! 카톡으로도 매일 짧게 보낼게요!"
+    },
+    {
+      "type": "FLAG_INC",
+      "key": "H5",
+      "delta": 5
+    },
+    {
+      "type": "DIALOGUE",
+      "speaker": "장윤영",
+      "text": "선배 자기 관리 잘 하시고요~~!"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "장윤영",
+      "transition": "fade"
+    },
+    {
+      "type": "BG",
+      "image": "bg_campus_cafe",
+      "transition": "fade"
+    },
+    {
+      "type": "CG",
+      "image": "cg_yuna_cafe",
+      "cgId": "cg_yuna_cafe"
+    },
+    {
+      "type": "NARRATION",
+      "text": "카페. 장윤영이 동기들과 신나서 대화 중. 봄볕이 갈색 머리에 비친다."
+    },
+    {
+      "type": "CG_HIDE"
+    },
+    {
+      "type": "CHARACTER_HIDE",
+      "id": "윤모",
+      "transition": "fade"
+    },
+    {
+      "type": "BGM_STOP",
+      "fade": 2
+    },
+    {
+      "type": "JUMP",
+      "sceneId": "ch04_07_close"
+    }
+  ],
+  "meta": {
+    "chapter": 4,
+    "time": "2026-04-30 morning",
+    "activeHeroines": [
+      "H5"
+    ]
+  }
+}
