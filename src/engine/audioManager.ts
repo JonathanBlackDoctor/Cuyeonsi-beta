@@ -61,6 +61,9 @@ class AudioManager {
   private currentBgm: CurrentBgm | null = null;
   // RESUMABLE_BGM_IDS에 속한 트랙이 정지·전환되면 unload 대신 여기에 보관. 다음 재생 시 동일 위치에서 fade in 재개.
   private stashedBgms: Map<string, Howl> = new Map();
+  // stash pause용 토큰. releaseCurrentBgm setTimeout 콜백이 stale 발화(이미 stash가 복원됐는데 pause 호출) 하는 회귀 방지.
+  private stashPauseTokens: Map<string, number> = new Map();
+  private tokenSeq = 0;
   private sfxPool: Map<string, Howl> = new Map();
   // 2026-05-09: loop ambient SFX 트래킹 (예: 열차 주행음).
   // BG 변경 시 자동 stopAllLoopingSfx로 정리 (장소 전환 = ambient 정지).
@@ -98,12 +101,20 @@ class AudioManager {
         this.releaseCurrentBgm({ fade: opts.fade });
       }
       this.stashedBgms.delete(en);
+      // 이전 release가 예약한 setTimeout(pause)가 stale 발화로 방금 복원한 howl을 멈추지 않도록 토큰 무효화.
+      this.stashPauseTokens.delete(en);
       this.currentBgm = { id: en, howl: stashed };
-      stashed.volume(0);
-      // pause된 상태에서 play()는 같은 seek 위치에서 재생을 이어간다 (Howler 기본 동작).
-      stashed.play();
-      enforceNativeLoop(stashed);
-      stashed.fade(0, targetVol, fadeIn);
+      if (stashed.playing()) {
+        // 아직 fade out 중(playing 상태) — html5 모드에서 play()를 재호출하면 두 번째
+        // <audio> 인스턴스가 생성된다. play() 생략하고 현재 위치에서 바로 fade up.
+        stashed.fade(stashed.volume(), targetVol, fadeIn);
+      } else {
+        // 이미 pause됐으면 처음부터 volume(0) → play() → fade in.
+        stashed.volume(0);
+        stashed.play();
+        enforceNativeLoop(stashed);
+        stashed.fade(0, targetVol, fadeIn);
+      }
       return;
     }
 
@@ -141,7 +152,15 @@ class AudioManager {
 
   stopBgm(opts: { fade?: number } = {}): void {
     if (!this.currentBgm) return;
+    const fadeOut = fadeMs(opts.fade);
     this.releaseCurrentBgm({ fade: opts.fade });
+    // 무음 방지 fallback — fade 완료 후 새 BGM이 없으면 일상 BGM으로 자동 복구.
+    // BGM 명령이 없는 씬 체인이나 BGM_STOP 후 빈 구간을 채운다.
+    setTimeout(() => {
+      if (!this.currentBgm) {
+        this.playBgm('bgm_daily', { fade: 2 });
+      }
+    }, fadeOut + 150);
   }
 
   /**
@@ -160,10 +179,14 @@ class AudioManager {
         prevStash.stop();
         prevStash.unload();
       }
+      const token = ++this.tokenSeq;
+      this.stashPauseTokens.set(id, token);
+      this.stashedBgms.set(id, howl);
       setTimeout(() => {
+        // stash가 그 사이 복원/교체됐으면 토큰이 바뀌어 있음 → pause 스킵.
+        if (this.stashPauseTokens.get(id) !== token) return;
         howl.pause();
       }, fadeOut + 50);
-      this.stashedBgms.set(id, howl);
     } else {
       setTimeout(() => {
         howl.stop();
@@ -171,6 +194,24 @@ class AudioManager {
       }, fadeOut + 50);
     }
     this.currentBgm = null;
+  }
+
+  /**
+   * 슬롯 로드용 — 현재 + stash 모두 즉시 정리. fade/stash 연속성은 상태 점프 의미가 없으므로 버린다.
+   * 호출 후 playBgm을 깨끗한 상태에서 다시 시작할 수 있다.
+   */
+  resetBgm(): void {
+    if (this.currentBgm) {
+      this.currentBgm.howl.stop();
+      this.currentBgm.howl.unload();
+      this.currentBgm = null;
+    }
+    for (const [, howl] of this.stashedBgms) {
+      howl.stop();
+      howl.unload();
+    }
+    this.stashedBgms.clear();
+    this.stashPauseTokens.clear();
   }
 
   playSfx(en: string, opts: { volume?: number; loop?: boolean } = {}): void {

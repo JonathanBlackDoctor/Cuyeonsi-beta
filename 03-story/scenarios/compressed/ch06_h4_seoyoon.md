@@ -766,4 +766,6 @@ status: review
 - {speaker:나서윤, preTyping1:800, prePause:1000, preTyping2:3000} 좋은 인연 만나길 바랄게 🥺🥺
 [/KAKAO]
 
+[BG: black fade=3]
+[VIDEO: video_reject_seoyoon skipable=false]
 [ENDING: END_H4_REJECT]

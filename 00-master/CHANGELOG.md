@@ -16,6 +16,16 @@
 
 ## 이력
 
+### 2026-05-11 — H4 거절 분기: Ch.5 챕터 종료 회상 스킵 + VEO 재생 중 BGM 연속 유지
+
+- **변경 1 — Ch.5 챕터 종료 회상 스킵**: `ch05_07_close` 씬 시작부에 `[IF: late_reply_count >= 2] [JUMP: ch06_h4_reject] [/IF]` 추가. 두 미니게임 모두 타임아웃(late_reply_count=2) 시 다섯 명 회상 모놀로그를 건너뛰고 바로 거절 카톡 씬으로 진입.
+- **변경 2 — 거절 씬 VEO 추가 + BGM 엔딩 끝까지 연속 재생**: `ch06_h4_reject` 씬에서 `[/KAKAO]` 직후 `[BG: black fade=3]` → `[VIDEO: video_reject_seoyoon skipable=false]` → `[ENDING: END_H4_REJECT]` 순으로 추가. `[BGM_STOP]` 없음 — sad BGM이 VEO + 엔딩 크레딧 + 타이틀 복귀 직전까지 끊기지 않고 흐르며, BGM 정리는 엔진 타이틀 전환 시 자동 처리.
+- **모듈**: `03-story/scenarios/ch05_decision.md`, `03-story/scenarios/compressed/ch05_decision.md`, `03-story/scenarios/ch06_h4_seoyoon.md`, `03-story/scenarios/compressed/ch06_h4_seoyoon.md`. 작가 메모 §8단계 표(ch06 풀버전) 스펙 갱신. 자동 생성물 `src/scenes/`은 `npm run compile:all`로 재컴파일 필요.
+- **사유**: PM 직접 지시 — "미니게임 실패 시 챕터 종료 회상 없이 바로 거절 카톡", "VEO + sad BGM 끊기지 않고 끝까지 재생".
+- **승인**: PM 직접 지시 (2026-05-11).
+
+---
+
 ### 2026-05-11 — 김규민 호감도 천장 ~+120 + 동일 대상 토스트 합치기 (Plan 120-drifting-pebble)
 
 - **배경**: `evaluateRoute` F-1b(`max(NPC) > max(H)` → END_SOLO_SUMMER)는 룰상 존재했지만 김규민(gyumin) best-play 천장이 ~+45라 winner H 누적(~+113~125)을 못 넘어 사문화돼 있었음. 김규민 집중 플레이로 SOLO 진입을 가능하게 하기 위해 천장을 ~+120까지 상향.

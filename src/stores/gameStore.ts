@@ -48,6 +48,9 @@ const _stepNullWarnedScenes = new Set<string>();
 // 이미 첫 호출 중에 처리되는 시나리오라 무시 안전).
 let _startSceneInFlight = false;
 
+// 선택지 더블클릭 방지 — 첫 pickChoice 완료 전 추가 호출은 noop.
+let _pickChoiceInFlight = false;
+
 // 사용자 입력(Space hold·연타 클릭)으로 인한 대사 과속 advance 차단.
 // 시스템 자동 advance(BG/CHARACTER/BGM/FLAG/VIDEO onEnded 등)는 영향받지 않음 — userAdvance만 게이트.
 const USER_ADVANCE_COOLDOWN_MS = 400;
@@ -734,25 +737,31 @@ export const useGameStore = create<GameState>()(
       },
 
       async pickChoice(choiceIndex: number) {
-        const cmd = get().currentCommand;
-        // 일반 CHOICE 또는 KAKAO 임베드 choices(2026-05-08 카톡 미니게임 재설계).
-        let choice: Choice | undefined;
-        if (cmd?.type === 'CHOICE') {
-          choice = cmd.choices[choiceIndex];
-        } else if (cmd?.type === 'KAKAO' && cmd.choices) {
-          choice = cmd.choices[choiceIndex];
-        }
-        if (!choice) return;
+        if (_pickChoiceInFlight) return;
+        _pickChoiceInFlight = true;
+        try {
+          const cmd = get().currentCommand;
+          // 일반 CHOICE 또는 KAKAO 임베드 choices(2026-05-08 카톡 미니게임 재설계).
+          let choice: Choice | undefined;
+          if (cmd?.type === 'CHOICE') {
+            choice = cmd.choices[choiceIndex];
+          } else if (cmd?.type === 'KAKAO' && cmd.choices) {
+            choice = cmd.choices[choiceIndex];
+          }
+          if (!choice) return;
 
-        const sceneMeta = interpreter.currentScene()?.meta;
-        const pickedChoice = choice;
-        set((s) => applyChoiceEffects(s, pickedChoice, sceneMeta));
+          const sceneMeta = interpreter.currentScene()?.meta;
+          const pickedChoice = choice;
+          set((s) => applyChoiceEffects(s, pickedChoice, sceneMeta));
 
-        if (pickedChoice.next) {
-          await get().startScene(pickedChoice.next);
-        } else {
-          set({ currentCommand: null, runtimeMode: 'scene' });
-          await get().advance();
+          if (pickedChoice.next) {
+            await get().startScene(pickedChoice.next);
+          } else {
+            set({ currentCommand: null, runtimeMode: 'scene' });
+            await get().advance();
+          }
+        } finally {
+          _pickChoiceInFlight = false;
         }
       },
 
@@ -1082,15 +1091,12 @@ export const useGameStore = create<GameState>()(
           _chapterAdvanceResolve: null,
         }));
 
-        // 3) BGM 동기화 — 같은 트랙이면 그대로 두고, 다르면 새로 재생.
-        // bgmTime은 항상 0 (PM 결정) — 즉, 트랙은 처음부터 fade-in.
-        const targetBgm = slot.audio.bgmTrack;
-        const currentBgm = audioManager.currentBgmId();
-        if (targetBgm && targetBgm !== currentBgm) {
-          audioManager.playBgm(targetBgm, { fade: 3 });
-        } else if (!targetBgm && currentBgm) {
-          audioManager.stopBgm({ fade: 2 });
-        }
+        // 3) BGM 동기화 — 로드는 상태 점프. 현재/stash 전부 리셋 후 targetBgm을 처음부터 재생.
+        // bgmTime은 항상 0 (PM 결정). 동일 ID 잔여 paused 상태도 resetBgm로 해소.
+        // BGM이 저장되지 않은 슬롯(null)은 무음 방지를 위해 bgm_daily로 fallback.
+        const targetBgm = slot.audio.bgmTrack ?? 'bgm_daily';
+        audioManager.resetBgm();
+        audioManager.playBgm(targetBgm, { fade: 3 });
 
         // 4) 첫 명령부터 진행 — 시각 레이어를 새로 그림
         await get().advance();

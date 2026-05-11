@@ -856,6 +856,10 @@ status: review
 
 [BGM_STOP fade=2]
 
+[IF: late_reply_count >= 2]
+[JUMP: ch06_h4_reject]
+[/IF]
+
 [지문] 윤모가 폰을 책상에 내려놓는다. 펜션 창밖으로 새벽 하늘이 조금씩 푸르러져 간다.
 
 [CHARACTER: 윤모 center default fade]

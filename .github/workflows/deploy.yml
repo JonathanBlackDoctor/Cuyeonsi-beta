@@ -38,6 +38,8 @@ jobs:
         run: npm ci
 
       - name: Compile + Build
+        env:
+          VITE_PANTRY_ID: ${{ secrets.VITE_PANTRY_ID }}
         run: |
           npm run compile
           npm run validate

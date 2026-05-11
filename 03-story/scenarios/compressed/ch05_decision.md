@@ -755,6 +755,10 @@ status: review
 
 [BGM_STOP fade=2]
 
+[IF: late_reply_count >= 2]
+[JUMP: ch06_h4_reject]
+[/IF]
+
 [CHARACTER: 윤모 center default fade]
 [BGM: 메인_테마 fade=4 volume=0.5]
 
