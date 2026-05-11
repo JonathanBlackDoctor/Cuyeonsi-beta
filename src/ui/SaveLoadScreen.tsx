@@ -104,12 +104,13 @@ export function SaveLoadScreen({ mode }: Props) {
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center p-4 overflow-y-auto"
+      className="absolute inset-0 overflow-y-auto"
       style={{ zIndex: 'var(--z-menu)', background: 'rgba(58, 46, 63, 0.85)' }}
       data-testid="save-load-screen"
       data-mode={mode}
     >
-      <div className="bg-bg text-text rounded-2xl p-6 md:p-8 w-full max-w-3xl flex flex-col gap-5">
+      <div className="min-h-full flex items-center justify-center p-4">
+       <div className="bg-bg text-text rounded-2xl p-6 md:p-8 w-full max-w-3xl flex flex-col gap-5">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">{title}</h2>
           <button
@@ -189,6 +190,7 @@ export function SaveLoadScreen({ mode }: Props) {
             {toast}
           </div>
         )}
+       </div>
       </div>
     </div>
   );
